@@ -74,7 +74,8 @@ function printNumbers(numbers) {
     }
 }
 
-// Function takes in an array of numbers, usesset so that only unique numbers mater, returns an unique array
+// Function takes in an array of numbers, usesset so that only unique numbers mater, returns an
+// unique array
 
 function uniqueValues(arr) {
     const unique = new Set(arr);
