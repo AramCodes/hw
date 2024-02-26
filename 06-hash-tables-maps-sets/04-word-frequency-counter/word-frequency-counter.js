@@ -9,10 +9,10 @@ function wordFrequencyCounter(str) {
     for (const word of fomattedStrArr) {
         if (word === "") continue;
 
-        if (wordFrequency.has(word)) {
-            wordFrequency.set(word, wordFrequency.get(word) + 1);
-        } else {
+        if (!wordFrequency.has(word)) {
             wordFrequency.set(word, 1);
+        } else {
+            wordFrequency.set(word, wordFrequency.get(word) + 1);
         }
     }
 
