@@ -1,12 +1,12 @@
 # Hash Table (Hash Map) Intro
 
-In computing, a `hash table` (hash map) is a data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index, also called a hash code, into an array of buckets or slots, where the desired value can be found along with it's index.
+In computing, a `hash table` (hash map) is a data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index, also called a hash code, into an array of buckets or slots, where the desired value can be found along with its index.
 
 Here is a visual representation of a hash table:
 
 <img src="../../assets/images/hash-table.png" width="600" />
 
-We have our keys on the left, which are names of people, and we have our stored values on the right, which in this case, are their phone numbers. In the middle is the hash function.
+We have our keys on the left, which are the names of people, and we have our stored values on the right, which in this case, are their phone numbers. In the middle is the hash function.
 
 ## Hash Function
 
@@ -18,7 +18,7 @@ There is something called a hash collision that can occur when using hash tables
 
 ## Hash Tables in JavaScript
 
-Hash tables are used in many different languages. In JavaScript, we actually have some built in structures that use hash tables. Even an object is an example of a hash table because data is represented in key-value pairs. We also have a `Map` and a `Set` data structure that use hash tables. In this section, I want to do some challenges that use maps and sets, but I also want to learn how to implement a hash table from scratch.
+Hash tables are used in many different languages. In JavaScript, we have some built-in structures that use hash tables. Even an object is an example of a hash table because data is represented in key-value pairs. We also have a `Map` and a `Set` data structure that use hash tables. In this section, I want to do some challenges that use maps and sets, but I also want to learn how to implement a hash table from scratch.
 
 ## Time & Space Complexity
 
@@ -37,11 +37,11 @@ Space complexity is O(n) because we have to store all of the keys and values in 
 
 Here are some of the methods that are available on a hash table:
 
-- `set(key, value)` - Adds a key-value pair to the hash table.
-- `get(key)` - Returns the value associated with a key.
-- `remove(key)` - Removes a key-value pair from the hash table.
-- `has(key)` - Returns true if the key exists in the hash table, false otherwise.
-- `keys()` - Returns an array of all the keys in the hash table.
-- `values()` - Returns an array of all the values in the hash table.
+-   `set(key, value)` - Adds a key-value pair to the hash table.
+-   `get(key)` - Returns the value associated with a key.
+-   `remove(key)` - Removes a key-value pair from the hash table.
+-   `has(key)` - Returns true if the key exists in the hash table, false otherwise.
+-   `keys()` - Returns an array of all the keys in the hash table.
+-   `values()` - Returns an array of all the values in the hash table.
 
 We will get to implementing our own custom hash table, but first I want to look at `maps` and `sets` in JavaScript.
