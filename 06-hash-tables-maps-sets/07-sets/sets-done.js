@@ -1,17 +1,17 @@
 // Create a set (try adding duplicate Values)
-const nameSet = new Set(['John', 'Jane', 'Joe', 'John', 'Joe']);
+const nameSet = new Set(["John", "Jane", "Joe", "John", "Joe"]);
 
 // Add values to set
-nameSet.add('Jack');
-nameSet.add('Jill');
+nameSet.add("Jack");
+nameSet.add("Jill");
 
 console.log(nameSet);
 
 // Check for values
-console.log(nameSet.has('Jill'));
+console.log(nameSet.has("Jill"));
 
 // Delete from set
-nameSet.delete('Jill');
+nameSet.delete("Jill");
 
 console.log(nameSet);
 
@@ -23,7 +23,7 @@ console.log(nameSet.values());
 
 // Iterate through set
 for (const name of nameSet) {
-  console.log(name);
+    console.log(name);
 }
 
 // Convert set to array
