@@ -1,102 +1,113 @@
 class HashTable {
-  constructor(limit = 14) {
-    this.storage = [];
-    this.limit = limit;
-  }
-
-  _hash(key, max) {
-    let hash = 0;
-
-    for (let i = 0; i < key.length; i++) {
-      hash += key.charCodeAt(i);
+    constructor(limit = 14) {
+        this.storage = [];
+        this.limit = limit;
     }
 
-    return hash % max;
-  }
+    _hash(key, max) {
+        let hash = 0;
 
-  set(key, value) {
-    const index = this._hash(key, this.limit);
-
-    if (this.storage[index] === undefined) {
-      this.storage[index] = [[key, value]];
-    } else {
-      let inserted = false;
-
-      for (let i = 0; i < this.storage[index].length; i++) {
-        if (this.storage[index][i][0] === key) {
-          this.storage[index][i][1] = value;
-          inserted = true;
+        for (let i = 0; i < key.length; i++) {
+            hash += key.charCodeAt(i);
         }
-      }
 
-      if (inserted === false) {
-        this.storage[index].push([key, value]);
-      }
+        return hash % max;
     }
-  }
 
-  get(key) {
-    const index = this._hash(key, this.limit);
+    set(key, value) {
+        const index = this._hash(key, this.limit);
 
-    if (this.storage[index] === undefined) {
-      return undefined;
-    } else {
-      for (let i = 0; i < this.storage[index].length; i++) {
-        if (this.storage[index][i][0] === key) {
-          return this.storage[index][i][1];
+        if (this.storage[index] === undefined) {
+            this.storage[index] = [[key, value]];
+        } else {
+            let inserted = false;
+
+            for (let i = 0; i < this.storage[index].length; i++) {
+                if (this.storage[index][i][0] === key) {
+                    this.storage[index][i][1] = value;
+                    inserted = true;
+                }
+            }
+
+            if (inserted === false) {
+                this.storage[index].push([key, value]);
+            }
         }
-      }
     }
-  }
 
-  remove(key) {
-    const index = this._hash(key, this.limit);
+    get(key) {
+        const index = this._hash(key, this.limit);
 
-    if (this.storage[index]) {
-      if (
-        this.storage[index].length === 1 &&
-        this.storage[index][0][0] === key
-      ) {
-        delete this.storage[index];
-      } else {
-        for (let i = 0; i < this.storage[index].length; i++) {
-          if (this.storage[index][i][0] === key) {
-            delete this.storage[index][i];
-          }
+        if (this.storage[index] === undefined) {
+            return undefined;
+        } else {
+            for (let i = 0; i < this.storage[index].length; i++) {
+                if (this.storage[index][i][0] === key) {
+                    return this.storage[index][i][1];
+                }
+            }
         }
-      }
     }
-  }
 
-  has(key) {
-    const index = this._hash(key, this.limit);
+    remove(key) {
+        const index = this._hash(key, this.limit);
 
-    if (this.storage[index]) {
-      for (let i = 0; i < this.storage[index].length; i++) {
-        if (this.storage[index][i][0] === key) {
-          return true;
+        if (this.storage[index]) {
+            if (
+                this.storage[index].length === 1 &&
+                this.storage[index][0][0] === key
+            ) {
+                delete this.storage[index];
+            } else {
+                for (let i = 0; i < this.storage[index].length; i++) {
+                    if (this.storage[index][i][0] === key) {
+                        delete this.storage[index][i];
+                    }
+                }
+            }
         }
-      }
     }
 
-    return false;
-  }
+    has(key) {
+        const index = this._hash(key, this.limit);
 
-  printTable() {
-    for (let i = 0; i < this.storage.length; i++) {
-      if (this.storage[i] !== undefined) {
-        console.log(`Bucket ${i}: ${JSON.stringify(this.storage[i])}`);
-      } else {
-        console.log(`Bucket ${i} Empty`);
-      }
+        if (this.storage[index]) {
+            for (let i = 0; i < this.storage[index].length; i++) {
+                if (this.storage[index][i][0] === key) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
-  }
 
-  clear() {
-    this.storage = [];
-  }
+    printTable() {
+        for (let i = 0; i < this.storage.length; i++) {
+            if (this.storage[i] !== undefined) {
+                console.log(`Bucket ${i}: ${JSON.stringify(this.storage[i])}`);
+            } else {
+                console.log(`Bucket ${i} Empty`);
+            }
+        }
+    }
 
- // ADD getValues() METHOD
+    clear() {
+        this.storage = [];
+    }
+
+    // ADD getValues() METHOD
+    getValues() {
+        const values = [];
+
+        this.storage.forEach((bucket) => {
+            bucket.forEach((value) => {
+                values.push(value[1]);
+            });
+        });
+
+        return values;
+    }
 }
 
 module.exports = HashTable;
