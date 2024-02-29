@@ -8,17 +8,17 @@ Let's start by creating a class called `Stack`. In the constructor, we'll create
 
 ```js
 class Stack {
-  constructor() {
-    this.maxSize = 100;
-    this.stack = [];
-    this.top = -1;
-  }
+    constructor() {
+        this.maxSize = 100;
+        this.stack = [];
+        this.top = -1;
+    }
 }
 ```
 
 ## `push` Method
 
-Create the `push` method to add to the stack. It will take in a `value` (element). First, check if the stack is full. If it is, return `false`. Increment the top index by `1`. Set the element at the top index of the stack to the value. Return `true`.
+Create the `push` method to add to the stack. It will take in a `value` (element). First, check if the stack is full. If it is, return `false`. Increment the top index by `1`. Set the element at the top index of the stack to the value and return true.
 
 ```js
  push(value) {
@@ -34,7 +34,7 @@ Create the `push` method to add to the stack. It will take in a `value` (element
 
 ## `isFull` Method
 
-Of course we need to add the method to check if the stack is full. It will return `true` if the top index is equal to the maximum size minus 1. Otherwise, it will return `false`.
+Of course, we need to add the method to check if the stack is full. It will return `true` if the top index is equal to the maximum size minus 1. Otherwise, it will return `false`.
 
 ```js
 isFull() {
@@ -74,7 +74,7 @@ Stack {
 
 ## `pop` Method
 
-Now let's create the `pop` method. It will remove the top element from the stack. It is important to know that `pop` and just about any method of any structure can be implemented in many ways. Sometimes the actual data will not be removed from the array (this.stack). It will just go by what is in the top of the stack. I want the actual data to be removed, so I will use the built in `pop` method on the array.
+Now let's create the `pop` method. It will remove the top element from the stack. It is important to know that `pop` and just about any method of any structure can be implemented in many ways. Sometimes the actual data will not be removed from the array (this.stack). It will just go by what is on the top of the stack. I want the actual data to be removed, so I will use the built-in .pop() method on the array.
 
 First, check if the stack is empty. If it is, return `null`. Then decrement the top by 1 and then return the result from `this.stack.pop()`.
 
