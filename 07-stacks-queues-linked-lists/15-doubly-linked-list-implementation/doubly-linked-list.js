@@ -78,4 +78,66 @@ DoublyLinkedList.prototype.insertAt = function (index, data) {
     this.length++;
 };
 
+DoublyLinkedList.prototype.get = function (index) {
+    if (index < 0 || index > this.length) {
+        return null;
+    }
+
+    let currentNode = this.head;
+
+    for (let i = 0; i < index; i++) {
+        currentNode = currentNode.next;
+    }
+
+    return currentNode;
+};
+
+DoublyLinkedList.prototype.remove = function (index) {
+    if (index < 0 || index > this.length) {
+        return null;
+    }
+
+    if (index === 0) {
+        this.head = this.head.next;
+
+        if (this.head) {
+            this.head.prev = null;
+        } else {
+            this.tail = null;
+        }
+    } else if (index === this.length - 1) {
+        this.tail = this.tail.prev;
+
+        if (this.tail) {
+            this.tail.next = null;
+        } else {
+            this.head = null;
+        }
+    } else {
+        let currentNode = this.head;
+
+        for (let i = 0; i < index; i++) {
+            currentNode = currentNode.next;
+        }
+
+        currentNode.prev.next = currentNode.next;
+        currentNode.next.prev = currentNode.prev;
+    }
+
+    this.length--;
+};
+
+DoublyLinkedList.prototype.contains = function (data) {
+    let current = this.head;
+
+    while (current) {
+        if (current.data === data) {
+            return true;
+        }
+        current = current.next;
+    }
+
+    return false;
+};
+
 module.exports = DoublyLinkedList;
