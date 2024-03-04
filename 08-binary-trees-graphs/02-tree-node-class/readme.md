@@ -2,7 +2,7 @@
 
 In this lesson, we will create a `TreeNode` class that will allow us to create a binary tree in JavaScript. We will create our tree manually for now by creating instances of the `TreeNode` class and assigning them to the `left` and `right` properties of other nodes. Later, we will create a `BinaryTree` class that will allow us to create a binary tree by passing in values.
 
-I'm going to set this up as a challenge. If you just want to follow along without trying it yourself, that is absolutely fine. You know what a binary tree is and you know how to create a class. If you want to try it yourself, here are the instructions.
+I'm going to set this up as a challenge. If you just want to follow along without trying it yourself, that is fine. You know what a binary tree is and you know how to create a class. If you want to try it yourself, here are the instructions.
 
 ## Instructions
 
@@ -14,9 +14,9 @@ Then use that class to create the following binary tree:
 
 ### Hints
 
-- The constructor will take a `value` parameter.
-- Initialize the `left` and `right` properties to `null` in the constructor.
-- Create an instance for each node in the tree and assign the appropriate values to the `left` and `right` properties.
+-   The constructor will take a `value` parameter.
+-   Initialize the `left` and `right` properties to `null` in the constructor.
+-   Create an instance for each node in the tree and assign the appropriate values to the `left` and `right` properties.
 
 ## Solutions
 
@@ -25,19 +25,19 @@ Then use that class to create the following binary tree:
 
 ```js
 class TreeNode {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
 }
 
-const a = new TreeNode('a');
-const b = new TreeNode('b');
-const c = new TreeNode('c');
-const d = new TreeNode('d');
-const e = new TreeNode('e');
-const f = new TreeNode('f');
+const a = new TreeNode("a");
+const b = new TreeNode("b");
+const c = new TreeNode("c");
+const d = new TreeNode("d");
+const e = new TreeNode("e");
+const f = new TreeNode("f");
 
 a.left = b;
 a.right = c;
@@ -48,10 +48,10 @@ c.right = f;
 
 ### Explanation
 
-- Create the `TreeNode` class with a constructor that takes a `value` parameter.
-- Initialize the `left` and `right` properties to `null`. This is because we don't know what the left and right children will be when we create the node. We will assign them later.
-- Create an instance of the `TreeNode` class for each node in the tree.
-- Assign the appropriate values to the `left` and `right` properties.
+-   Create the `TreeNode` class with a constructor that takes a `value` parameter.
+-   Initialize the `left` and `right` properties to `null`. This is because we don't know what the left and right children will be when we create the node. We will assign them later.
+-   Create an instance of the `TreeNode` class for each node in the tree.
+-   Assign the appropriate values to the `left` and `right` properties.
 
 The code above implements exactly what we see in the diagram.
 
