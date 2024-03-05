@@ -14,7 +14,7 @@ class Graph {
 
 ### `addVertex` Method
 
-We will have a method called `addVertex` that takes a name of a vertex as a parameter. We will set the adjacency list at that vertex to be an empty array.
+We will have a method called `addVertex` that takes the name of a vertex as a parameter. We will set the adjacency list at that vertex to be an empty array.
 
 ```JavaScript
 addVertex(vertex) {
@@ -69,7 +69,7 @@ Aspen -> Dallas, Tokyo
 
 ### `removeEdge` Method
 
-We will also have a method called `removeEdge` that takes two vertices as parameters. We will reassign the key of vertex1 to be an array that does not contain vertex2. We will reassign the key of vertex2 to be an array that does not contain vertex1.
+We will also have a method called `removeEdge` that takes two vertices as parameters. We will reassign the key of vertex1 to an array that does not contain vertex2. We will reassign the key of vertex2 to an array that does not contain vertex1.
 
 ```JavaScript
 removeEdge(vertex1, vertex2) {
