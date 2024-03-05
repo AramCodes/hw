@@ -4,11 +4,11 @@ In this lesson, we will implement a binary search tree in JavaScript. We will st
 
 ```js
 class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
 }
 ```
 
@@ -16,9 +16,9 @@ Next, we will create a `BinarySearchTree` class. This class will have a `root` p
 
 ```js
 class BinarySearchTree {
-  constructor() {
-    this.root = null;
-  }
+    constructor() {
+        this.root = null;
+    }
 }
 ```
 
@@ -59,7 +59,7 @@ insert(value) {
 
 We start by creating a new node with the given value.
 
-If the tree is empty, we set the root node to be the new node. Otherwise, we start at the root node, and traverse the tree until we find a node without a left or right child.
+If the tree is empty, we set the root node to be the new node. Otherwise, we start at the root node and traverse the tree until we find a node without a left or right child.
 
 If the new value is less than the current node's value, we move on to the left child. If the new value is greater than or equal to the current node's value, we move on to the right child.
 
@@ -193,7 +193,7 @@ Finally, we will implement the `printTree` method. This method will print the tr
 
 ## Binary Search Tree Runtime Analysis
 
-BST's are very efficient data structures. They are very fast at inserting, looking up, and deleting values and have a runtime of O(log n) for each of these operations except for printing the tree, which has a runtime of O(n). This is because we have to visit every node in the tree to print it.
+BSTs are very efficient data structures. They are very fast at inserting, looking up, and deleting values and have a runtime of O(log n) for each of these operations except for printing the tree, which has a runtime of O(n). This is because we have to visit every node in the tree to print it.
 
 | Operation | Runtime  |
 | --------- | -------- |
@@ -236,7 +236,7 @@ This will log the following:
 }
 ```
 
-You can see that the node with the value 4 has a left child with the value 2, and a right child with the value 7.
+You can see that the node with the value 4 has a left child with the value 2 and a right child with the value 7.
 
 Let's remove the node with the value 7 from the tree.
 
@@ -287,108 +287,110 @@ I know this may have been very overwhelming, but don't expect to master this in 
 Here is the testing suite that you can use for the binary search tree data structure.
 
 ```js
-const { Node, BinarySearchTree } = require('./binary-search-tree');
+const { Node, BinarySearchTree } = require("./binary-search-tree");
 
-describe('BinarySearchTree', () => {
-  let bst;
+describe("BinarySearchTree", () => {
+    let bst;
 
-  beforeEach(() => {
-    bst = new BinarySearchTree();
-  });
+    beforeEach(() => {
+        bst = new BinarySearchTree();
+    });
 
-  test('should insert values correctly', () => {
-    bst.insert(10);
-    bst.insert(5);
-    bst.insert(15);
-    bst.insert(2);
+    test("should insert values correctly", () => {
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(15);
+        bst.insert(2);
 
-    expect(bst.root.value).toBe(10);
-    expect(bst.root.left.value).toBe(5);
-    expect(bst.root.right.value).toBe(15);
-    expect(bst.root.left.left.value).toBe(2);
-  });
+        expect(bst.root.value).toBe(10);
+        expect(bst.root.left.value).toBe(5);
+        expect(bst.root.right.value).toBe(15);
+        expect(bst.root.left.left.value).toBe(2);
+    });
 
-  test('should find existing nodes using lookup', () => {
-    bst.insert(10);
-    bst.insert(5);
-    bst.insert(15);
+    test("should find existing nodes using lookup", () => {
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(15);
 
-    expect(bst.lookup(10).value).toBe(10);
-    expect(bst.lookup(5).value).toBe(5);
-    expect(bst.lookup(15).value).toBe(15);
-  });
+        expect(bst.lookup(10).value).toBe(10);
+        expect(bst.lookup(5).value).toBe(5);
+        expect(bst.lookup(15).value).toBe(15);
+    });
 
-  test('should return null for non-existing nodes using lookup', () => {
-    bst.insert(10);
-    bst.insert(5);
-    bst.insert(15);
+    test("should return null for non-existing nodes using lookup", () => {
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(15);
 
-    expect(bst.lookup(2)).toBeNull();
-    expect(bst.lookup(8)).toBeNull();
-    expect(bst.lookup(20)).toBeNull();
-  });
+        expect(bst.lookup(2)).toBeNull();
+        expect(bst.lookup(8)).toBeNull();
+        expect(bst.lookup(20)).toBeNull();
+    });
 
-  test('should remove nodes correctly', () => {
-    bst.insert(10);
-    bst.insert(5);
-    bst.insert(15);
-    bst.insert(2);
-    bst.insert(7);
+    test("should remove nodes correctly", () => {
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(15);
+        bst.insert(2);
+        bst.insert(7);
 
-    bst.remove(2);
-    expect(bst.lookup(2)).toBeNull();
+        bst.remove(2);
+        expect(bst.lookup(2)).toBeNull();
 
-    bst.remove(5);
-    expect(bst.lookup(5)).toBeNull();
+        bst.remove(5);
+        expect(bst.lookup(5)).toBeNull();
 
-    bst.remove(15);
-    expect(bst.lookup(15)).toBeNull();
+        bst.remove(15);
+        expect(bst.lookup(15)).toBeNull();
 
-    bst.remove(10);
-    expect(bst.lookup(10)).toBeNull();
+        bst.remove(10);
+        expect(bst.lookup(10)).toBeNull();
 
-    bst.remove(7);
-    expect(bst.lookup(7)).toBeNull();
-  });
+        bst.remove(7);
+        expect(bst.lookup(7)).toBeNull();
+    });
 
-  test('should handle removing root node correctly', () => {
-    bst.insert(10);
-    bst.insert(5);
-    bst.insert(15);
+    test("should handle removing root node correctly", () => {
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(15);
 
-    bst.remove(10);
-    expect(bst.root.value).toBe(15);
-  });
+        bst.remove(10);
+        expect(bst.root.value).toBe(15);
+    });
 
-  test('should print tree in-order', () => {
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {}); // Spy on console.log and mock the implementation
+    test("should print tree in-order", () => {
+        const consoleSpy = jest
+            .spyOn(console, "log")
+            .mockImplementation(() => {}); // Spy on console.log and mock the implementation
 
-    const bst = new BinarySearchTree();
-    bst.insert(8);
-    bst.insert(3);
-    bst.insert(10);
-    bst.insert(1);
-    bst.insert(6);
-    bst.insert(14);
-    bst.insert(4);
-    bst.insert(7);
-    bst.insert(13);
+        const bst = new BinarySearchTree();
+        bst.insert(8);
+        bst.insert(3);
+        bst.insert(10);
+        bst.insert(1);
+        bst.insert(6);
+        bst.insert(14);
+        bst.insert(4);
+        bst.insert(7);
+        bst.insert(13);
 
-    bst.printTree();
+        bst.printTree();
 
-    // Expect the console.log to be called with the correct values in in-order traversal
-    expect(consoleSpy).toHaveBeenNthCalledWith(1, 1);
-    expect(consoleSpy).toHaveBeenNthCalledWith(2, 3);
-    expect(consoleSpy).toHaveBeenNthCalledWith(3, 4);
-    expect(consoleSpy).toHaveBeenNthCalledWith(4, 6);
-    expect(consoleSpy).toHaveBeenNthCalledWith(5, 7);
-    expect(consoleSpy).toHaveBeenNthCalledWith(6, 8);
-    expect(consoleSpy).toHaveBeenNthCalledWith(7, 10);
-    expect(consoleSpy).toHaveBeenNthCalledWith(8, 13);
-    expect(consoleSpy).toHaveBeenNthCalledWith(9, 14);
+        // Expect the console.log to be called with the correct values in in-order traversal
+        expect(consoleSpy).toHaveBeenNthCalledWith(1, 1);
+        expect(consoleSpy).toHaveBeenNthCalledWith(2, 3);
+        expect(consoleSpy).toHaveBeenNthCalledWith(3, 4);
+        expect(consoleSpy).toHaveBeenNthCalledWith(4, 6);
+        expect(consoleSpy).toHaveBeenNthCalledWith(5, 7);
+        expect(consoleSpy).toHaveBeenNthCalledWith(6, 8);
+        expect(consoleSpy).toHaveBeenNthCalledWith(7, 10);
+        expect(consoleSpy).toHaveBeenNthCalledWith(8, 13);
+        expect(consoleSpy).toHaveBeenNthCalledWith(9, 14);
 
-    // Restore the original console.log implementation
-    consoleSpy.mockRestore();
-  });
+        // Restore the original console.log implementation
+        consoleSpy.mockRestore();
+    });
 });
 ```

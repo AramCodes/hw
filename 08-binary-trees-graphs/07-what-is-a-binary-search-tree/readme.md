@@ -1,8 +1,8 @@
 # Binary Search Tree (BST)
 
-Now that you know what a binary tree data structure is, we are going to look at `binary search trees` or `BST`. A binary search tree (BST) is a specific type of binary tree that follows a particular ordering and sorting property. 
+Now that you know what a binary tree data structure is, we are going to look at `binary search trees` or `BST`. A binary search tree (BST) is a specific type of binary tree that follows a particular ordering and sorting property.
 
-While the ordering rule is commonly associated with numeric values, it's important to note that binary search trees can handle various types of data, not just numbers. One of the key advantages of binary search trees are that they're versatile enough to accommodate any data type that can be compared for ordering.
+While the ordering rule is commonly associated with numeric values, it's important to note that binary search trees can handle various types of data, not just numbers. One of the key advantages of binary search trees is that they're versatile enough to accommodate any data type that can be compared for ordering.
 
 For instance, consider a binary search tree that stores strings representing names in alphabetical order. The tree's structure ensures that names are organized in a way that allows for efficient searches, insertions, and deletions. Similarly, binary search trees can be used for custom objects, where the ordering is determined by specific attributes or properties of the objects such as the price of a product. So we'll be using numeric values just for simplicity and so you can wrap your head around it.
 
@@ -14,13 +14,13 @@ Let's look at the following tree and go over the rules for a BST:
 2. The left child's value is less than the parent node's value.
 3. The right child's value is greater than or equal to the parent node's value.
 
-The image above is a valid BST. Everything on the left is less than it's parent and everything on the right is greater than the parent.
+The image above is a valid BST. Everything on the left is less than its parent and everything on the right is greater than the parent.
 
 This does not only apply to immediate child nodes. Let's look at the image on the following image:
 
 <img src="../../assets/images/binary-search-tree.png" alt="" />
 
-If we look at the tree on the right-hand side, it is a valid binary tree, but it is not a valid binary search tree. The reason being that 3 is on the right side of 4, but 3 is less than 4. Everything on the right side of a node must be greater than or equal to the node's value.
+If we look at the tree on the right-hand side, it is a valid binary tree, but it is not a valid binary search tree. The reason 3 is on the right side of 4, but 3 is less than 4. Everything on the right side of a node must be greater than or equal to the node's value.
 
 This ordering makes searching very efficient. Let's say we are searching for the value 7. We start at the root node of 9. 7 is less than 9, so we move to the left child node of 4. 7 is greater than 4, so we move to the right child node of 4 and we find 7.
 
@@ -28,7 +28,7 @@ The time complexity of search, insertion, and deletion operations in a binary se
 
 ### Operations on a Binary Search Tree
 
-These are the three main operations on a binary search tree. I'm just going to give you a quick summary on the process for all three. It most likely won't be completely cleat until we actually code it out.
+These are the three main operations on a binary search tree. I'm just going to give you a quick summary of the process for all three. It most likely won't be completely clear until we code it out.
 
 1. **Insertion**: To insert a new node into a binary search tree, we start at the root and compare the new node's value with the current node's value. If the value is less, we move to the left subtree; if it is greater or equal, we move to the right subtree. This process continues recursively until we find an empty spot, where we insert the new node.
 
