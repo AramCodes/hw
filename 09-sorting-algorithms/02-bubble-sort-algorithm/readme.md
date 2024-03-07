@@ -4,7 +4,7 @@ In this lesson, we're going to look at the `Bubble sort` algorithm. This is one 
 
 ## What is Bubble Sort?
 
-The `Bubble sort` sorting algorithm is comparison-based. Each pair of adjacent elements are compared with eachother and the elements are swapped if they are not in order. This is repeated until the list is sorted.
+The `Bubble sort` sorting algorithm is comparison-based. Each pair of adjacent elements are compared with each other and the elements are swapped if they are not in order. This is repeated until the list is sorted.
 
 The algorithm gets its name from the way that smaller or larger elements "bubble" to the top of the list. Because it only uses comparisons to operate on elements, it is a `comparison sort`. Although the algorithm is simple, it is too slow and impractical for most problems even when compared to other sorting algorithms such as `insertion sort`. It can be practical if the input is usually in sort order but may occasionally have some out-of-order elements nearly in position.
 
@@ -48,9 +48,9 @@ We have now completed one pass through the array. We repeat this process until t
 
 ### Complexity & Efficiency
 
-- Worst-case time complexity: O(n^2)
-- Best-case time complexity: O(n)
-- Average-case time complexity: O(n^2)
-- Space complexity: O(1)
+-   Worst-case time complexity: O(n^2)
+-   Best-case time complexity: O(n)
+-   Average-case time complexity: O(n^2)
+-   Space complexity: O(1)
 
-The worst-case time complexity is O(n^2) because we have to iterate through the array n times and for each iteration, we have to iterate through the array n times. This is because we have to compare each element with all the other elements in the array. What really makes bubble sorts inefficient is that it swaps elements multiple times per iteration. For example, in the first iteration, it swaps 5 and 4. Then, it swaps 5 and 2. Then, it swaps 5 and 1. It does this for each iteration. This is why the best-case time complexity is O(n). If the array is already sorted, we don't need to swap any elements.
+The worst-case time complexity is O(n^2) because we have to iterate through the array n times and for each iteration, we have to iterate through the array n times. This is because we have to compare each element with all the other elements in the array. What makes bubble sorts inefficient is that they swap elements multiple times per iteration. For example, in the first iteration, it swaps 5 and 4. Then, it swaps 5 and 2. Then, it swaps 5 and 1. It does this for each iteration. This is why the best-case time complexity is O(n). If the array is already sorted, we don't need to swap any elements.

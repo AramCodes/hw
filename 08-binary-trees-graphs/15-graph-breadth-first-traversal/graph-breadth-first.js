@@ -27,8 +27,6 @@ function breadthFirstTraversal(graph, start) {
 
 module.exports = breadthFirstTraversal;
 
-const Queue = require("./queue");
-
 // function breadthFirstTraversal(graph, startingVertex) {
 //   const visited = new Set();
 //   const result = [];
