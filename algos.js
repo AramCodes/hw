@@ -743,3 +743,51 @@ function humanReadable(seconds) {
         pad(seconds % 60)
     );
 }
+
+// ********************************** Increment strings ******************************************
+function incrementString(input) {
+    if (isNaN(parseInt(input[input.length - 1]))) return input + "1";
+    return input.replace(/(0*)([0-9]+$)/, function (match, p1, p2) {
+        var up = parseInt(p2) + 1;
+        return up.toString().length > p2.length
+            ? p1.slice(0, -1) + up
+            : p1 + up;
+    });
+}
+
+let incrementString2 = (str) =>
+    str.replace(/([0-8]|\d?9+)?$/, (e) => (e ? +e + 1 : 1));
+
+const incrementString3 = (s) => s.replace(/[0-8]?9*$/, (m) => String(++m));
+
+// ************************************** consecutive Strings *************************************
+
+function longestConsec(strarr, k) {
+    let arrLength = strarr.length;
+    let arr = [];
+
+    if (arrLength == 0 || k > arrLength || k <= 0) return "";
+
+    for (let i = 0; i <= arrLength - k; i++) {
+        let current = strarr[i];
+        for (let ii = k, jj = 1; ii > 1; ii--, jj++) {
+            current += strarr[i + jj];
+        }
+        arr.push(current);
+    }
+    return arr.reduce(function (a, b) {
+        return a.length > b.length ? a : a.length == b.length ? a : b;
+    });
+}
+
+function longestConsec2(strarr, k) {
+    var longest = "";
+    for (var i = 0; k > 0 && i <= strarr.length - k; i++) {
+        var tempArray = strarr.slice(i, i + k);
+        var tempStr = tempArray.join("");
+        if (tempStr.length > longest.length) {
+            longest = tempStr;
+        }
+    }
+    return longest;
+}
