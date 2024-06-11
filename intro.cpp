@@ -200,3 +200,110 @@ int main() {
 
     return 0;
 }
+
+/*Write a number that takes in  a loan amount and returns the reqiered deposit*/
+
+
+#include <iostream>
+using namespace std;
+
+
+int main() {
+    int loanAmount;
+    cout << "Enter loan amount higher than 0 and less than 50,000" <<endl;
+    cin >> loanAmount;
+
+
+    if (loanAmount > 50000) {
+        cout << "Loans above 50,000 are not allowed" <<endl;
+    } else if (loanAmount < 10000) {
+        cout << "Your required deposit is $" << loanAmount *.10 <<endl;
+    }
+    else if (loanAmount < 15000) {
+        cout << "Your required deposit is $" << loanAmount *.06 + 200 <<endl;
+    }
+    else if (loanAmount < 20000){
+        cout << "Your required deposit is $" << loanAmount *.05 + 500 <<endl;
+    }
+    else {
+        cout << "Your required deposit is $" << loanAmount *.03 + 1000 <<endl;
+    }
+
+    return 0;
+}
+
+// Write three functions, float getNum(),  float add(float, float), void outSum(float);  that asks user for two numbers, finds the sum of two numbers, and displays the sum 
+// repeatly in a main program until the user enter “0” for either one of the numbers. For example, in the main, user enter 2, 4, output sum is 6. Then, 3,7, sum is 10, then 
+// 8, 7, sum is 15. When user enter one 0, the repeating process stops. 
+#include <iostream>
+using namespace std;
+
+
+float getNum() {
+    float temp;
+    cin >> temp;
+    return temp;
+}
+
+
+float add(float num1, float num2) {
+return num1 + num2;
+}
+
+
+void outSum(float sum) {
+    cout << sum <<endl;
+    return;
+}
+
+
+int main() {
+    float num1 = 0.5;
+    float num2 = 0.3;
+
+
+
+    while (num1 || num2 != 0) {
+    num1 = getNum();
+    num2 = getNum();
+
+
+    if (num1 == 0 || num2 == 0) {
+            cout << "Program Terminated" <<endl;
+            return 0;
+        }
+        else {
+            outSum(add(num1, num2));
+        } 
+
+
+    }
+
+}
+
+// For a list of numbers entered by the user and terminated by 0, find the sum of the positive number and the sum of the negative numbers. C++ language only. No points will 
+// be given if other languages are used. 
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int number;
+    int sumPositive = 0;
+    int sumNegative = 0;
+
+    cout << "Enter 0 to terminate program" << endl;
+    do {
+        cin >> number;
+        if (number > 0) {
+            sumPositive += number;
+        } else if (number < 0) {
+            sumNegative += number;
+        }
+    } while (number != 0);
+
+    cout << "Sum of positive numbers: " << sumPositive << endl;
+    cout << "Sum of negative numbers: " << sumNegative << endl;
+
+    return 0;
+}
