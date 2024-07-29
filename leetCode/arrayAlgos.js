@@ -97,8 +97,8 @@ var removeDuplicates = function (nums) {
 };
 
 //Search Insert Position
-//Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
-//You must write an algorithm with O(log n) runtime complexity.
+//Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where
+//it would be if it were inserted in order.You must write an algorithm with O(log n) runtime complexity.
 var searchInsert = function (nums, target) {
     for (let i = 0; i < nums.length; i++) {
         if (nums[i] >= target) {
@@ -110,7 +110,7 @@ var searchInsert = function (nums, target) {
 };
 
 // let left = 0;
-// let right = nums.length - 1;
+// let right = nums.length - 1; takes too long
 
 // while( left <= right) {
 //     let mid = left + Math.floor( (right - left) / 2);
@@ -128,3 +128,60 @@ var searchInsert = function (nums, target) {
 // }
 
 // return left;
+
+//Remove One element to make array strictly increasing
+//Given a 0-indexed integer array nums, return true if it can be made strictly increasing after removing exactly one element, or false if otherwise.
+//If the array is already strictly increasing, return true
+var canBeIncreasing = function (nums) {
+    let count = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] <= nums[i - 1]) {
+            count += 1;
+            if (nums[i] <= nums[i - 2] && nums[i + 1] <= nums[i - 1]) {
+                return false;
+            }
+        }
+    }
+
+    return count <= 1;
+};
+
+//You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.Given an integer array flowerbed
+// containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return true if n new flowers can be planted in the flowerbed without violating the
+// no-adjacent-flowers rule and false otherwise.
+var canPlaceFlowers = function (flowerbed, n) {
+    let count = 0;
+
+    for (let i = 0; i < flowerbed.length; i++) {
+        // loop through the 2D flowerbed
+        if (
+            flowerbed[i] === 0 && // if the current flowerbed is empty
+            flowerbed[i - 1] !== 1 && // if the previous flowerbed is not used
+            flowerbed[i + 1] !== 1 // if the next flowerbed is not used
+        ) {
+            flowerbed[i] = 1; // sets flowerbed
+            count += 1; // increments amount of free beds
+        }
+    }
+
+    return count >= n;
+};
+//Given an array of integers arr, return true if and only if it is a valid mountain array.
+var validMountainArray = function (arr) {
+    let peak = Math.floor(arr.length / 2);
+    let count = 0;
+    //passes all preliminary tests but will not allow submission check tommorrow
+    if (arr.length >= 3) {
+        for (let i = 0; i < peak; i++) {
+            if (
+                arr[i] < arr[i + 1] &&
+                arr[arr.length - (1 + i)] < arr[arr.length - (2 + i)]
+            ) {
+                count += 4;
+            }
+        }
+    }
+
+    return count >= arr.length ? true : false;
+};
