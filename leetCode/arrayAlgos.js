@@ -169,7 +169,7 @@ var canPlaceFlowers = function (flowerbed, n) {
 };
 //Given an array of integers arr, return true if and only if it is a valid mountain array.
 var validMountainArray = function (arr) {
-    let peak = Math.floor(arr.length / 2);
+    let peak = Math.ceil(arr.length / 2);
     let count = 0;
     //passes all preliminary tests but will not allow submission check tommorrow
     if (arr.length >= 3) {
@@ -184,4 +184,74 @@ var validMountainArray = function (arr) {
     }
 
     return count >= arr.length ? true : false;
+};
+
+var validMountainArray = function (arr) {
+    let i = 0;
+    //passes all preliminary tests but will not allow submission
+    if (arr.length < 3) {
+        return false;
+    }
+
+    while (i < arr.length && arr[i] < arr[i + 1]) {
+        i++;
+    }
+
+    while (i < arr.length && arr[i] > arr[i + 1]) {
+        i++;
+    }
+
+    return i === arr.length - 1;
+};
+
+var validMountainArray = function (arr) {
+    let i = 0;
+    //allows submission and passes all preliminary tests
+    while (i < arr.length && i + 1 < arr.length && arr[i] < arr[i + 1]) {
+        i++;
+    }
+
+    if (i === 0 || i + 1 >= arr.length) {
+        return false;
+    }
+
+    while (i < arr.length && i + 1 < arr.length) {
+        if (arr[i] <= arr[i++ + 1]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+// Given an array arr of integers, check if there exist two indices i and j such that :
+// i != j
+// 0 <= i, j < arr.length
+// arr[i] == 2 * arr[j]
+var checkIfExist = function (arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (
+            //pass all preliminary tests but 1 test failed for sumbmission
+            arr.includes(arr[i] * 2) &&
+            arr[i] >= 0 &&
+            i !== arr.indexOf(arr[i] * 2)
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+var checkIfExist = function (arr) {
+    for (let i = 0; i < arr.length; i++) {
+        //passes all preliminary test and allows submission
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] === 2 * arr[j] || arr[i] === arr[j] / 2) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 };
