@@ -255,3 +255,44 @@ var checkIfExist = function (arr) {
 
     return false;
 };
+
+// Given an integer array nums of length n, you want to create an array ans of length 2n where
+//ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
+var getConcatenation = function (nums) {
+    // doubles an arrray and return it concatenated
+    //passes all preliminary tests and allows submission
+    return [...nums, ...nums];
+};
+
+//Given an array of integers nums, return the number of good pairs. A pair (i, j) is called good if nums[i] == nums[j] and i < j.
+var numIdenticalPairs = function (nums) {
+    //passes all preliminary tests and allows submission
+    let count = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[i] === nums[j]) {
+                count += 1;
+            }
+        }
+    }
+
+    return count;
+};
+
+//There is a programming language with only four operations and one variable X: ++X and X++ increments the value of the variable X by 1.
+//--X and X-- decrements the value of the variable X by 1. Initially, the value of X is 0. Given an array of strings operations
+//containing a list of operations, return the final value of X after performing all the operations.
+
+var finalValueAfterOperations = function (operations) {
+    // passes all preliminary tests and allows submission
+    //runtime beats 92% and memore beats 86% of submissions.
+    let x = 0;
+
+    for (let i = 0; i < operations.length; i++) {
+        if (operations[i] === "++X" || operations[i] === "X++") x += 1;
+        else if (operations[i] === "--X" || operations[i] === "X--") x -= 1;
+    }
+
+    return x;
+};
