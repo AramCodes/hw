@@ -356,3 +356,76 @@ var findWordsContaining = function (words, x) {
 
     return arr;
 };
+
+//Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+//Return the running sum of nums.
+var runningSum = function (nums) {
+    //room for improvement in memory and runtime (possible solutions:map and reduce, or
+    //destructured array and reduce)
+    // passes all preliminary tests and allows submission
+    //runtime beats 50% and memory beats 45% of submissions.
+    let sum = 0;
+    let sumArr = [];
+    for (let i = 0; i < nums.length; i++) {
+        sum += nums[i];
+        sumArr.push(sum);
+    }
+
+    return sumArr;
+};
+
+//You are given an m x n integer grid accounts where accounts[i][j] is the amount of money the i​​​​​​​​​​​th​​​​ customer has in the j​​​​​​​​​​​th​​​​ bank. Return
+//the wealth that the richest customer has. A customer's wealth is the amount of money they have in all their bank accounts. The
+//richest customer is the customer that has the maximum wealth.
+var maximumWealth = function (accounts) {
+    let maxWealth = 0;
+    // passes all preliminary tests and allows submission
+    //runtime beats 94% and memory beats 58% of submissions.
+
+    for (let i = 0; i < accounts.length; i++) {
+        let currMaxWealth = 0;
+
+        for (let j = 0; j < accounts[i].length; j++) {
+            currMaxWealth += accounts[i][j];
+        }
+
+        if (currMaxWealth > maxWealth) {
+            maxWealth = currMaxWealth;
+        }
+    }
+
+    return maxWealth;
+};
+
+//There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the
+//ith kid has, and an integer extraCandies, denoting the number of extra candies that you have. Return a boolean array result of
+//length n, where result[i] is true if, after giving the ith kid all the extraCandies, they will have the greatest number of candies
+//among all the kids, or false otherwise.Note that multiple kids can have the greatest number of candies.
+var kidsWithCandies = function (candies, extraCandies) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 58% and memory beats 32% of submissions. lots of room for improvement
+    const result = [];
+    const max = Math.max(...candies);
+
+    for (let i = 0; i < candies.length; i++) {
+        if (candies[i] + extraCandies >= max) {
+            result.push(true);
+        } else {
+            result.push(false);
+        }
+    }
+
+    return result;
+};
+
+var kidsWithCandies = function (candies, extraCandies) {
+    //even worse than the first solution
+    //passes all preliminary tests and allows submission
+    //runtime beats 9% and memory beats 40% of submissions. lots of room for improvement (major decrese in runtime performance(-49%) but
+    //slight increase in memory performance(+8%))
+    const max = Math.max(...candies);
+    return candies.map((candy, ind) => {
+        // just removal of unused parameter increases runtime significantly(+31%) (_ instead of candy)
+        return candies[ind] + extraCandies >= max;
+    });
+};
