@@ -286,7 +286,7 @@ var numIdenticalPairs = function (nums) {
 
 var finalValueAfterOperations = function (operations) {
     // passes all preliminary tests and allows submission
-    //runtime beats 92% and memore beats 86% of submissions.
+    //runtime beats 92% and memorey beats 86% of submissions.
     let x = 0;
 
     for (let i = 0; i < operations.length; i++) {
@@ -295,4 +295,64 @@ var finalValueAfterOperations = function (operations) {
     }
 
     return x;
+};
+
+//Given a zero-based permutation nums (0-indexed), build an array ans of the same length where ans[i] = nums[nums[i]] for each 0 <= i < nums.length and return it.
+//A zero-based permutation nums is an array of distinct integers from 0 to nums.length - 1 (inclusive).
+var buildArray = function (nums) {
+    // passes all preliminary tests and allows submission
+    //runtime beats 92% and memory beats 85% of submissions. can be improved by removing
+    const ans = nums.map((_, inx) => {
+        return nums[nums[inx]];
+    });
+
+    return ans;
+};
+
+//You are given an integer array nums. In one operation, you can add or subtract 1 from any element of nums.Return the minimum number of operations to make all elements of
+//nums divisible by 3.
+
+var minimumOperations = function (nums) {
+    let operations = 0;
+    // passes all preliminary tests and allows submission
+    //runtime beats 78% and memory beats 88% of submissions.
+
+    for (let i = 0; i < nums.length; i++) {
+        if ((nums[i] - 1) % 3 === 0 || (nums[i] + 1) % 3 === 0) {
+            operations++;
+        }
+    }
+
+    return operations;
+};
+
+//Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+var shuffle = function (nums, n) {
+    // passes all preliminary tests and allows submission
+    //runtime beats 84% and memory beats 20% of submissions.
+    const arr = []; // sets empty array
+    for (let i = 0; i < n; i++) {
+        // loops through the array outter loop grabbing first sub array and inner loop grabbing second sub array
+        arr.push(nums[i]);
+        for (let j = i + n; j <= i + n; j++) {
+            arr.push(nums[j]);
+        }
+    }
+
+    return arr;
+};
+
+//You are given a 0-indexed array of strings words and a character x. Return an array of indices representing the words that contain the character x.
+//Note that the returned array may be in any order.
+var findWordsContaining = function (words, x) {
+    // passes all preliminary tests and allows submission
+    //runtime beats 56% and memory beats 34% of submissions.
+    const arr = [];
+    words.forEach((word, idx) => {
+        if (word.includes(x)) {
+            arr.push(idx);
+        }
+    });
+
+    return arr;
 };
