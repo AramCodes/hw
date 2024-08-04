@@ -429,3 +429,161 @@ var kidsWithCandies = function (candies, extraCandies) {
         return candies[ind] + extraCandies >= max;
     });
 };
+
+//Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you
+//have to count the number of valid j's such that j != i and nums[j] < nums[i].Return the answer in an array.
+
+var smallerNumbersThanCurrent = function (nums) {
+    let result = [];
+    // passes all preliminary tests and allows submission
+    //runtime beats 87% and memory beats 50% of submissions.
+
+    for (let i = 0; i < nums.length; i++) {
+        count = 0;
+
+        for (let j = 0; j < nums.length; j++) {
+            if (nums[i] > nums[j]) {
+                count++;
+            }
+        }
+
+        result.push(count);
+    }
+
+    return result;
+};
+
+//Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and
+//nums[i] + nums[j] < target.
+
+var countPairs = function (nums, target) {
+    let count = 0;
+    // passes all preliminary tests and allows submission
+    //runtime beats 88% and memory beats 35% of submissions.
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[i] + nums[j] < target) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+};
+
+//There are n employees in a company, numbered from 0 to n - 1. Each employee i has worked for hours[i] hours in the company.The
+//company requires each employee to work for at least target hours. You are given a 0-indexed array of non-negative integers hours of
+//length n and a non-negative integer target. Return the integer denoting the number of employees who worked at least target hours.
+var numberOfEmployeesWhoMetTarget = function (hours, target) {
+    let metTarget = 0;
+    // passes all preliminary tests and allows submission
+    //runtime beats 67% and memory beats 78% of submissions.
+
+    for (let i = 0; i < hours.length; i++) {
+        if (hours[i] >= target) {
+            metTarget++;
+        }
+    }
+
+    return metTarget;
+};
+
+var numberOfEmployeesWhoMetTarget = function (hours, target) {
+    let metTarget = 0;
+    // passes all preliminary tests and allows submission
+    //runtime beats 40% and memory beats 30% of submissions.
+
+    hours.forEach((hour) => {
+        if (hour >= target) {
+            metTarget++;
+        }
+    });
+
+    return metTarget;
+};
+
+//Given a 0-indexed integer array nums, find a 0-indexed integer array answer where: answer.length == nums.length and
+//answer[i] = |leftSum[i] - rightSum[i]|
+
+var leftRightDifference = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 95% and memory beats 82% of submissions.
+    const max = nums.length;
+    const leftSumArr = [];
+    leftSumArr[0] = 0;
+    const rightSumArr = [];
+    rightSumArr[max - 1] = 0;
+    const answer = [];
+
+    for (let i = 1; i < max; i++) {
+        leftSumArr[i] = leftSumArr[i - 1] + nums[i - 1];
+    }
+
+    for (let i = max - 2; i >= 0; i--) {
+        rightSumArr[i] = rightSumArr[i + 1] + nums[i + 1];
+    }
+
+    for (let i = 0; i < max; i++) {
+        answer[i] = Math.abs(leftSumArr[i] - rightSumArr[i]);
+    }
+
+    return answer;
+};
+
+//You are given 2 integer arrays nums1 and nums2 of lengths n and m respectively. You are also given a positive integer k. A pair
+//(i, j) is called good if nums1[i] is divisible by nums2[j] * k (0 <= i <= n - 1, 0 <= j <= m - 1). Return the total number of
+//good pairs.
+var numberOfPairs = function (nums1, nums2, k) {
+    let count = 0;
+    // passes all preliminary tests and allows submission
+    //runtime beats 97.03% and memory beats 7.16% of submissions. lots of room for improvement on memeory performance
+
+    for (let i = 0; i < nums1.length; i++) {
+        for (let j = 0; j < nums2.length; j++) {
+            if (nums1[i] % (nums2[j] * k) === 0) {
+                count += 1;
+            }
+        }
+    }
+
+    return count;
+};
+
+//You are given a 0-indexed integer array nums of even length and there is also an empty array arr. Alice and Bob decided to play a
+//game where in every round Alice and Bob will do one move. The rules of the game are as follows: Every round, first Alice will remove
+//the minimum element from nums, and then Bob does the same. Now, first Bob will append the removed element in the array arr, and then
+//Alice does the same. The game continues until nums becomes empty and return the resulting array arr.
+var numberGame = function (nums) {
+    //passes all preliminary tests but will not allow submission
+    const max = nums.length / 2; //runtime beats 54% and memory beats 12% of submissions.
+    let arr = [];
+    let alicePick;
+    let bobPick;
+
+    for (let i = 0; i < max; i++) {
+        alicePick = Math.min(...nums);
+        nums.splice(nums.indexOf(alicePick), 1);
+        bobPick = Math.min(...nums);
+        nums.splice(nums.indexOf(bobPick), 1);
+
+        arr = [...arr, bobPick, alicePick];
+    }
+};
+
+var numberGame = function (nums) {
+    let arr = [];
+    let alicePick;
+    let bobPick;
+
+    while (nums.length) {
+        //passes all preliminary tests but will not allow submission
+        alicePick = Math.min(...nums); //runtime beats 78% and memory beats 13% of submissions.
+        nums.splice(nums.indexOf(alicePick), 1);
+        bobPick = Math.min(...nums);
+        nums.splice(nums.indexOf(bobPick), 1);
+
+        arr = [...arr, bobPick, alicePick];
+    }
+
+    return arr;
+};
