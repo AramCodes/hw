@@ -587,3 +587,58 @@ var numberGame = function (nums) {
 
     return arr;
 };
+
+// A sentence is a list of words that are separated by a single space with no leading or trailing spaces. You are given an array of
+//strings sentences, where each sentences[i] represents a single sentence. Return the maximum number of words that appear in a
+//single sentence.
+var mostWordsFound = function (sentences) {
+    let currCount = 0; //passes all preliminary tests and allows submission
+    let newSentences = []; //runtime beats 14% and memory beats 48% of submissions.
+
+    for (let i = 0; i < sentences.length; i++) {
+        newSentences[i] = sentences[i].split(" ");
+        if (newSentences[i].length > currCount) {
+            currCount = newSentences[i].length;
+        }
+    }
+
+    return currCount;
+};
+
+//Given two arrays of integers nums and index. Your task is to create target array under the following rules: Initially target array
+//is empty. From left to right read nums[i] and index[i], insert at index index[i] the value nums[i] in target array. Repeat the
+//previous step until there are no elements to read in nums and index. Return the target array.
+
+var createTargetArray = function (nums, index) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 93.03% and memory beats 45% of submissions.
+    let target = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        target.splice(index[i], 0, nums[i]);
+
+        //target[index[i]] = nums[i]; fails because it doesn't remove element which breaks data integretity
+    }
+
+    return target;
+};
+
+//The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty. For example, the XOR total
+//of the array [2,5,6] is 2 XOR 5 XOR 6 = 1. Given an array nums, return the sum of all XOR totals for every subset of nums. Note:
+//Subsets with the same elements should be counted multiple times. An array a is a subset of an array b if a can be obtained from b by
+//deleting some (possibly zero) elements of b.
+var subsetXORSum = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 51.34% and memory beats 97% of submissions
+    let sum = 0;
+    for (let i = 0; i < 1 << nums.length; i++) {
+        let xor = 0;
+        for (let j = 0; j < nums.length; j++) {
+            if (i & (1 << j)) {
+                xor ^= nums[j];
+            }
+        }
+        sum += xor;
+    }
+    return sum;
+};
