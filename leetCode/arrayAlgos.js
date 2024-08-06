@@ -642,3 +642,83 @@ var subsetXORSum = function (nums) {
     }
     return sum;
 };
+//You are given an array of strings names, and an array heights that consists of distinct positive integers. Both arrays are of length
+//n. For each index i, names[i] and heights[i] denote the name and height of the ith person. Return names sorted in descending order by
+//the people's heights.
+var sortPeople = function (names, heights) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 16% and memory beats 78% of submissions. lots of room for improvement on runtime
+    let target = [];
+    let sortedHeights = [...heights];
+    sortedHeights.sort((a, b) => b - a);
+
+    for (let i = 0; i < sortedHeights.length; i++) {
+        target[i] = names[heights.indexOf(sortedHeights[i])];
+    }
+
+    return target;
+};
+
+var sortPeople = function (names, heights) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 8% and memory beats 94.6% of submissions. lots of room for improvement
+    let max = heights.length;
+
+    for (let i = 0; i < max - 1; i++) {
+        for (let j = 0; j < max - 1; j++) {
+            if (heights[j] < heights[j + 1]) {
+                let temp = heights[j];
+                heights[j] = heights[j + 1];
+                heights[j + 1] = temp;
+
+                let tempName = names[j];
+                names[j] = names[j + 1];
+                names[j + 1] = tempName;
+            }
+        }
+    }
+    return names;
+};
+
+//You are given a string s and an integer array indices of the same length. The string s will be shuffled such that the character at
+//the ith position moves to indices[i] in the shuffled string. Return the shuffled string.
+var restoreString = function (s, indices) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 23% and memory beats 69% of submissions.
+    let newString = [];
+
+    for (let i = 0; i < indices.length; i++) {
+        newString[i] = s[indices.indexOf(i)];
+    }
+
+    return newString.join("");
+};
+
+var restoreString = function (s, indices) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 77% and memory beats 92% of submissions.
+    let newString = [];
+
+    for (let i = 0; i < s.length; i++) {
+        newString[indices[i]] = s.charAt(i);
+    }
+
+    return newString.join("");
+};
+
+//You have an array of floating point numbers averages which is initially empty. You are given an array nums of n integers where n is
+//even. You repeat the following procedure n / 2 times: Remove the smallest element, minElement, and the largest element maxElement,
+//from nums. Add (minElement + maxElement) / 2 to averages. Return the minimum element in averages.
+var minimumAverage = function (nums) {
+    //passes all but 1 preliminary test
+    let averages = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        let minEl = nums.splice(nums.indexOf(Math.min(...nums)), 1);
+        let maxEl = nums.splice(nums.indexOf(Math.max(...nums)), 1);
+
+        averages.push((Number(...minEl) + Number(...maxEl)) / 2);
+    }
+
+    return Math.min(...averages);
+};
