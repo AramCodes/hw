@@ -710,10 +710,18 @@ var restoreString = function (s, indices) {
 //even. You repeat the following procedure n / 2 times: Remove the smallest element, minElement, and the largest element maxElement,
 //from nums. Add (minElement + maxElement) / 2 to averages. Return the minimum element in averages.
 var minimumAverage = function (nums) {
-    //passes all but 1 preliminary test
+    //passes all preliminary tests and allows submission
+    //runtime beats 94% and memory beats 46% of submissions.
     let averages = [];
 
-    for (let i = 0; i < nums.length; i++) {
+    // for (let i = 0; i < nums.length; i++) { //for loops stops before last element
+    //     let minEl = nums.splice(nums.indexOf(Math.min(...nums)), 1);
+    //     let maxEl = nums.splice(nums.indexOf(Math.max(...nums)), 1);
+
+    //     averages.push((Number(...minEl) + Number(...maxEl)) / 2);
+    // }
+
+    while (nums.length >= 1) {
         let minEl = nums.splice(nums.indexOf(Math.min(...nums)), 1);
         let maxEl = nums.splice(nums.indexOf(Math.max(...nums)), 1);
 
@@ -721,4 +729,70 @@ var minimumAverage = function (nums) {
     }
 
     return Math.min(...averages);
+};
+
+//You are given an array items, where each items[i] = [typei, colori, namei] describes the type, color, and name of the ith item. You
+//are also given a rule represented by two strings, ruleKey and ruleValue. The ith item is said to match the rule if one of the
+//following is true: ruleKey == "type" and ruleValue == typei. ruleKey == "color" and ruleValue == colori.
+//ruleKey == "name" and ruleValue == namei.Return the number of items that match the given rule.
+var countMatches = function (items, ruleKey, ruleValue) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 70% and memory beats 68% of submissions.
+    let count = 0;
+    let ruleIndex;
+
+    if (ruleKey === "type") {
+        ruleIndex = 0;
+    } else if (ruleKey === "color") {
+        ruleIndex = 1;
+    } else if (ruleKey === "name") {
+        ruleIndex = 2;
+    }
+
+    for (let i = 0; i < items.length; i++) {
+        for (let j = ruleIndex; j <= ruleIndex; j++) {
+            if (items[i][j] === ruleValue) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+};
+
+//Given two string arrays word1 and word2, return true if the two arrays represent the same string, and false otherwise. A string is
+//represented by an array if the array elements concatenated in order forms the string.
+var arrayStringsAreEqual = function (word1, word2) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 6% and memory beats 13% of submissions.
+    if (word1.join("") === word2.join("")) {
+        return true;
+    }
+
+    return false;
+};
+
+var arrayStringsAreEqual = function (word1, word2) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 22% and memory beats 31% of submissions.
+    return word1.join("") === word2.join("");
+};
+
+//A sentence is a list of words that are separated by a single space with no leading or trailing spaces. Each of the words consists of
+//only uppercase and lowercase English letters (no punctuation). For example, "Hello World", "HELLO", and "hello world hello world" are
+//all sentences. You are given a sentence s​​​​​​ and an integer k​​​​​​. You want to truncate s​​​​​​ such that it contains only the first k​​​​​​ words.
+//Return s​​​​​​ after truncating it.
+
+var truncateSentence = function (s, k) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 57% and memory beats 88% of submissions.
+    let newS = s.split(" ").splice(0, k);
+
+    return newS.join(" ");
+};
+
+var truncateSentence = function (s, k) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 80% and memory beats 7% of submissions.
+    return s.split(" ").splice(0, k).join(" ");
 };
