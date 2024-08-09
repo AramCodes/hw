@@ -831,3 +831,51 @@ var minMovesToSeat = function (seats, students) {
 
     return moves;
 };
+
+//You are given a positive integer array nums. The element sum is the sum of all the elements in nums. The digit sum is the sum of all
+//the digits (not necessarily distinct) that appear in nums. Return the absolute difference between the element sum and digit sum of
+//nums. Note that the absolute difference between two integers x and y is defined as |x - y|.
+var differenceOfSum = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 84% and memory beats 30% of submissions.
+    let elementSum = 0;
+    let digits = nums.toString().split("");
+    let digitSum = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        elementSum += nums[i];
+    }
+
+    digits = digits.filter(function (item) {
+        return item !== ",";
+    });
+
+    for (let i = 0; i < digits.length; i++) {
+        if (typeof digits[i] === "string") {
+            digitSum += Number(digits[i]);
+        }
+    }
+
+    return Math.abs(elementSum - digitSum);
+};
+
+//You are given a 0-indexed, strictly increasing integer array nums and a positive integer diff. A triplet (i, j, k) is an arithmetic
+//triplet if the following conditions are met: i < j < k, nums[j] - nums[i] == diff, and nums[k] - nums[j] == diff. Return the number
+//of unique arithmetic triplets.
+var arithmeticTriplets = function (nums, diff) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 26% and memory beats 71% of submissions.
+    let count = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            for (let k = j + 1; k < nums.length; k++) {
+                if (nums[j] - nums[i] === diff && nums[k] - nums[j] === diff) {
+                    count += 1;
+                }
+            }
+        }
+    }
+
+    return count;
+};
