@@ -879,3 +879,119 @@ var arithmeticTriplets = function (nums, diff) {
 
     return count;
 };
+
+//Given an integer array nums and an integer k, return the number of pairs (i, j) where i < j such that |nums[i] - nums[j]| == k. The
+//value of |x| is defined as: x if x >= 0. -x if x < 0.
+var countKDifference = function (nums, k) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 59% and memory beats 74% of submissions.
+    let pairs = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (Math.abs(nums[i] - nums[j]) === k) {
+                pairs++;
+            }
+        }
+    }
+
+    return pairs;
+};
+
+//Given an array of strings words, return the first palindromic string in the array. If there is no such string, return an empty
+//string "". A string is palindromic if it reads the same forward and backward.
+var firstPalindrome = function (words) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 43% and memory beats 54% of submissions.
+    for (let i = 0; i < words.length; i++) {
+        if (words[i] === words[i].split("").reverse().join("")) {
+            return words[i];
+        }
+    }
+
+    return "";
+};
+
+//You are given two integer arrays nums1 and nums2 of sizes n and m, respectively. Calculate the following values: answer1 : the number
+//of indices i such that nums1[i] exists in nums2. answer2 : the number of indices i such that nums2[i] exists in nums1. Return
+//[answer1,answer2].
+var findIntersectionValues = function (nums1, nums2) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 33% and memory beats 57% of submissions.
+    const response = [];
+    let count1 = 0;
+    let count2 = 0;
+
+    for (let i = 0; i < nums1.length; i++) {
+        if (nums2.includes(nums1[i])) {
+            count1++;
+        }
+    }
+
+    response.push(count1);
+
+    for (let i = 0; i < nums2.length; i++) {
+        if (nums1.includes(nums2[i])) {
+            count2++;
+        }
+    }
+
+    response.push(count2);
+
+    return response;
+};
+
+//You are given a string allowed consisting of distinct characters and an array of strings words. A string is consistent if all
+//characters in the string appear in the string allowed. Return the number of consistent strings in the array words.
+var countConsistentStrings = function (allowed, words) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 90% and memory beats 97% of submissions.
+    let count = 0;
+
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        let consistent = true;
+
+        for (let j = 0; j < word.length; j++) {
+            if (!allowed.includes(word[j])) {
+                consistent = false;
+                break;
+            }
+        }
+
+        if (consistent) {
+            count++;
+        }
+    }
+
+    return count;
+};
+
+//There is a biker going on a road trip. The road trip consists of n + 1 points at different altitudes. The biker starts his trip on
+//point 0 with altitude equal 0. You are given an integer array gain of length n where gain[i] is the net gain in altitude between
+//points i​​​​​​ and i + 1 for all (0 <= i < n). Return the highest altitude of a point.
+var largestAltitude = function (gain) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 44% and memory beats 19% of submissions.
+    let bikerAlt = 0;
+    const difPoints = [0];
+
+    for (let i = 0; i < gain.length; i++) {
+        bikerAlt += gain[i];
+        difPoints.push(bikerAlt);
+    }
+
+    return Math.max(...difPoints);
+};
+
+var largestAltitude = function (gain) {
+    //passes all preliminary tests and allows submission
+    //improvement on runtime to 93% and memory to 29% of submissions.
+    const difPoints = [0];
+
+    for (let i = 0; i < gain.length; i++) {
+        difPoints.push(difPoints[difPoints.length - 1] + gain[i]);
+    }
+
+    return Math.max(...difPoints);
+};
