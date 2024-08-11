@@ -995,3 +995,64 @@ var largestAltitude = function (gain) {
 
     return Math.max(...difPoints);
 };
+
+//Given an array of positive integers arr, return the sum of all possible odd-length subarrays of arr. A subarray is a contiguous
+//subsequence of the array.
+
+var sumOddLengthSubarrays = function (arr) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 78% and memory beats 46% of submissions.
+    let count = 0;
+
+    function sumBetween(start, end) {
+        return arr[end] - (arr[start - 1] || 0);
+    }
+
+    for (let i = 1; i < arr.length; i++) {
+        arr[i] += arr[i - 1];
+    }
+
+    for (let start = 0; start < arr.length; start++) {
+        for (let end = start; end < arr.length; end += 2) {
+            count += sumBetween(start, end);
+        }
+    }
+
+    return count;
+};
+
+var sumOddLengthSubarrays = function (arr) {};
+
+//209. Given an array of positive integers nums and a positive integer target, return the minimal length of a subarray whose sum is
+//greater than or equal to target. If there is no such subarray, return 0 instead.
+var minSubArrayLen = function (target, nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 56% and memory beats 69% of submissions.
+    let prev = 0;
+    let lowestArray = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        prev += nums[i];
+        lowestArray++;
+
+        if (prev >= target) {
+            break;
+        }
+    }
+
+    if (prev < target) {
+        return 0;
+    }
+
+    for (let i = 1; i < nums.length; i++) {
+        const currSum = prev - nums[i - 1];
+        if (currSum >= target) {
+            lowestArray--;
+            prev = currSum;
+        } else {
+            prev = currSum + nums[i + lowestArray - 1];
+        }
+    }
+
+    return lowestArray;
+};
