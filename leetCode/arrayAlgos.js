@@ -1056,3 +1056,146 @@ var minSubArrayLen = function (target, nums) {
 
     return lowestArray;
 };
+
+//Given an array of strings words and a string s, determine if s is an acronym of words. The string s is considered an acronym of
+//words if it can be formed by concatenating the first character of each string in words in order. For example, "ab" can be formed
+//from ["apple", "banana"], but it can't be formed from ["bear", "aardvark"]. Return true if s is an acronym of words, and false
+//otherwise.
+var isAcronym = function (words, s) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 98% and memory beats 28% of submissions
+    let count = 0;
+    const newS = [...s];
+    s = s.split("");
+
+    for (let i = 0; i < words.length; i++) {
+        for (let j = 0; j < 1; j++) {
+            if (newS[j] === words[i][j]) {
+                newS.splice(newS.indexOf(words[i][j]), 1);
+                count++;
+            }
+        }
+    }
+
+    return count === words.length && count === s.length;
+};
+
+//You are given an array of positive integers nums. Alice and Bob are playing a game. In the game, Alice can choose either all
+//single-digit numbers or all double-digit numbers from nums, and the rest of the numbers are given to Bob. Alice wins if the sum of
+//her numbers is strictly greater than the sum of Bob's numbers. Return true if Alice can win this game, otherwise, return false.
+var canAliceWin = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 38% and memory beats 84% of submissions
+    let single = 0;
+    let double = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] < 10) {
+            single += nums[i];
+        } else {
+            double += nums[i];
+        }
+    }
+
+    return single > double || double > single;
+};
+
+var canAliceWin = function (nums) {
+    //passes all preliminary tests and allows submission
+    //major improment on runtime to 65% from 38% and major decrease on memory to 42% from 84%
+    const chance = [0, 0];
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] < 10) {
+            chance[0] += nums[i];
+        } else {
+            chance[1] += nums[i];
+        }
+    }
+
+    return chance[0] > chance[1] || chance[1] > chance[0];
+};
+
+//Given an array of strings words where each word can be written as a concatenation of the Morse code of each letter. Return the
+//number of different transformations among all words we have.
+var uniqueMorseRepresentations = function (words) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 80% and memory beats 96% of submissions.
+    const morseLetters = [
+        ".-",
+        "-...",
+        "-.-.",
+        "-..",
+        ".",
+        "..-.",
+        "--.",
+        "....",
+        "..",
+        ".---",
+        "-.-",
+        ".-..",
+        "--",
+        "-.",
+        "---",
+        ".--.",
+        "--.-",
+        ".-.",
+        "...",
+        "-",
+        "..-",
+        "...-",
+        ".--",
+        "-..-",
+        "-.--",
+        "--..",
+    ];
+    const letters = "abcdefghijklmnopqrstuvwxyz";
+    const morseWords = [];
+    let currWord = "";
+
+    for (let i = 0; i < words.length; i++) {
+        currWord = "";
+
+        for (let j = 0; j < words[i].length; j++) {
+            let index = letters.indexOf(words[i][j]);
+            currWord += morseLetters[index];
+        }
+
+        morseWords.push(currWord);
+    }
+
+    return Array.from(new Set(morseWords)).length;
+};
+
+//Given the array of integers nums, you will choose two different indices i and j of that array. Return the maximum value of
+//(nums[i]-1)*(nums[j]-1).
+var maxProduct = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 64% and memory beats 98% of submissions
+    const firstMax = nums.splice(nums.indexOf(Math.max(...nums)), 1);
+    const secMax = nums.splice(nums.indexOf(Math.max(...nums)), 1);
+
+    return (secMax[0] - 1) * (firstMax[0] - 1);
+};
+
+//The product difference between two pairs (a, b) and (c, d) is defined as (a * b) - (c * d). Given an integer array nums, choose four
+//distinct indices w, x, y, and z such that the product difference between pairs (nums[w], nums[x]) and (nums[y], nums[z]) is
+//maximized. Return the maximum such product difference.
+var maxProductDifference = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 67% and memory 46%
+    nums.sort((a, b) => a - b);
+
+    return nums[nums.length - 2] * nums[nums.length - 1] - nums[1] * nums[0];
+};
+
+var maxProductDifference = function (nums) {
+    //passes all preliminary tests and allows submission
+    //humoungous improvements runtime beats 99.52% from 67% and memory beats 71% from 46%
+    const firstMax = nums.splice(nums.indexOf(Math.max(...nums)), 1);
+    const secMax = nums.splice(nums.indexOf(Math.max(...nums)), 1);
+    const firstMin = nums.splice(nums.indexOf(Math.min(...nums)), 1);
+    const secMin = nums.splice(nums.indexOf(Math.min(...nums)), 1);
+
+    return firstMax * secMax - firstMin * secMin;
+};
