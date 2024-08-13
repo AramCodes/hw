@@ -1199,3 +1199,22 @@ var maxProductDifference = function (nums) {
 
     return firstMax * secMax - firstMin * secMin;
 };
+
+//On a 2D plane, there are n points with integer coordinates points[i] = [xi, yi]. Return the minimum time in seconds to visit all the
+//points in the order given by points.
+var minTimeToVisitAllPoints = function (points) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 97% and memory beats 99% of submissions
+    let secs = 0;
+
+    for (let i = 1; i < points.length; i++) {
+        //for loop checks the difference of the x and y coordinates on the cartesian plane and returns the max to get the
+        //diagonal length.
+        secs += Math.max(
+            Math.abs(points[i][0] - points[i - 1][0]),
+            Math.abs(points[i][1] - points[i - 1][1])
+        );
+    }
+
+    return secs;
+};
