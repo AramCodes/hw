@@ -1218,3 +1218,151 @@ var minTimeToVisitAllPoints = function (points) {
 
     return secs;
 };
+
+//You are given a 0-indexed integer array nums and an integer k. Your task is to perform the following operation exactly k times in
+//order to maximize your score: 1. Select an element m from nums. 2. Remove the selected element m from the array. 3. Add a new element
+//with a value of m + 1 to the array. 4. Increase your score by m. 5. Return the maximum score you can achieve after performing the
+//operation exactly k times.
+var maximizeSum = function (nums, k) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 25% and memory beats 8% of submissions.Needs drastic improvement
+    let max = 0;
+    let m;
+
+    while (k > 0) {
+        m = Number(nums.splice(nums.indexOf(Math.max(...nums)), 1));
+        max += m;
+        nums.push(m + 1);
+        k--;
+    }
+
+    return max;
+};
+
+var maximizeSum = function (nums, k) {
+    //passes all preliminary tests and allows submission
+    //Improvements made, runtime beats 22%, down from 25%, and memory 15%, up from 8%, of submissions.
+    let max = 0;
+    let m;
+
+    for (let i = 0; i < k; i++) {
+        m = Number(nums.splice(nums.indexOf(Math.max(...nums)), 1));
+        max += m;
+        nums.push(m + 1);
+    }
+
+    return max;
+};
+
+var maximizeSum = function (nums, k) {
+    //passes all preliminary tests and allows submission
+    //Improvements made runtime beats 60%, up from 22%, and memory beats 39%, up from 8%, of submissions.
+    let max = 0;
+    let m;
+
+    for (let i = 0; i < k; i++) {
+        m = Math.max(...nums);
+        nums.splice(nums.indexOf(m), 1);
+        nums.push(m + 1);
+        max += m;
+    }
+
+    return max;
+};
+
+// A distinct string is a string that is present only once in an array. Given an array of strings arr, and an integer k, return the
+// kth distinct string present in arr. If there are fewer than k distinct strings, return an empty string "". Note that the strings are
+// considered in the order in which they appear in the array.
+var kthDistinct = function (arr, k) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 78% and memory beats 60% of submissions.
+    const hash = {};
+
+    for (let i = 0; i < arr.length; i++) {
+        if (!hash[arr[i]]) {
+            hash[arr[i]] = 1;
+        } else {
+            hash[arr[i]] += 1;
+        }
+    }
+
+    for (let string in hash) {
+        if (hash[string] === 1) {
+            if (k === 1) {
+                return string;
+            } else if (k > 1) {
+                k--;
+            }
+        }
+    }
+
+    return "";
+};
+
+var kthDistinct = function (arr, k) {
+    //passes all preliminary tests and allows submission
+    //runtime decreased from 78% to 25% and memory increased from 60% to 96% of submissions.
+    const distinct = arr.filter(
+        (value) => arr.indexOf(value) == arr.lastIndexOf(value)
+    );
+
+    return distinct[k - 1] || "";
+};
+
+//You are given two arrays of equal length, nums1 and nums2. Each element in nums1 has been increased (or decreased
+//in the case of negative) by an integer, represented by the variable x. As a result, nums1 becomes equal to nums2.
+//Two arrays are considered equal when they contain the same integers with the same frequencies. Return the integer
+//x.
+var addedInteger = function (nums1, nums2) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 60% and memory beats 35% of submissions.
+    nums1.sort((a, b) => a - b);
+
+    nums2.sort((a, b) => a - b);
+
+    return nums2[0] - nums1[0];
+};
+
+var addedInteger = function (nums1, nums2) {
+    //passes all preliminary tests and allows submission
+    //major improvements up to 92% on runtime and 61% on memory
+    const first = Math.min(...nums1);
+    const second = Math.min(...nums2);
+
+    return second - first;
+};
+
+//You are given a 0-indexed array of strings details. Each element of details provides information about a given passenger compressed
+//into a string of length 15. The system is such that: The first ten characters consist of the phone number of passengers. The next
+//character denotes the gender of the person. The following two characters are used to indicate the age of the person. The last two
+//characters determine the seat allotted to that person. Return the number of passengers who are strictly more than 60 years old.
+var countSeniors = function (details) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 28% and memory beats 16% of submissions
+    let count = 0;
+    let age;
+
+    for (let i = 0; i < details.length; i++) {
+        age = Number(details[i].slice(11, 13));
+
+        if (age > 60) {
+            count++;
+        }
+    }
+
+    return count;
+};
+
+var countSeniors = function (details) {
+    //passes all preliminary tests and allows submission
+    // medium improvements runtime up 37% from 28% and memory up 63% from 16% of submissions
+    let count = 0;
+
+    for (let i = 0; i < details.length; i++) {
+        if (Number(details[i].slice(11, 13)) > 60) {
+            count++;
+        }
+    }
+
+    return count;
+};
