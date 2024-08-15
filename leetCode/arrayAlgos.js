@@ -1366,3 +1366,92 @@ var countSeniors = function (details) {
 
     return count;
 };
+
+//You are given a 1-indexed integer array nums of length n. An element nums[i] of nums is called special if i divides n, i.e.
+//n % i == 0. Return the sum of the squares of all special elements of nums.
+var sumOfSquares = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 62% and memory beats 30% of submissions
+    let sum = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums.length % (i + 1) === 0) {
+            sum += nums[i] * nums[i];
+        }
+    }
+
+    return sum;
+};
+
+var sumOfSquares = function (nums) {
+    //passes all preliminary tests and allows submission
+    //improvement on runtime to 75% up from 62% and memory stayed the same at 30% of submissions
+    let sum = 0;
+
+    nums.forEach((num, i) => {
+        if (nums.length % (i + 1) === 0) {
+            sum += nums[i] * nums[i];
+        }
+    });
+
+    return sum;
+};
+
+var sumOfSquares = function (nums) {
+    //passes all preliminary tests and allows submission
+    // great improvement on runtime to 91% up from 75% and memory up to 92% from 30% of submissions
+    let sum = 0;
+
+    nums.forEach((_, i) => {
+        if (nums.length % (i + 1) === 0) {
+            sum += nums[i] * nums[i];
+        }
+    });
+
+    return sum;
+};
+
+//You are given a 0-indexed array words consisting of distinct strings. The string words[i] can be paired
+//with the string words[j] if: The string words[i] is equal to the reversed string of words[j]. 0 <= i < j
+//< words.length. Return the maximum number of pairs that can be formed from the array words. Note that
+//each string can belong in at most one pair.
+var maximumNumberOfStringPairs = function (words) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 80% and memory beats 36% of all submissions
+    const arr = [];
+
+    for (let i = 0; i < words.length; i++) {
+        for (let j = i + 1; j < words.length; j++) {
+            if ([...words[i]].reverse().join("") === words[j]) {
+                arr.push(words[i]);
+            }
+        }
+    }
+
+    return arr.length;
+};
+
+//Given an array of integers arr, and three integers a, b and c. You need to find the number of good triplets. A triplet (arr[i], arr[j], arr[k]) is good if the following
+//conditions are true: 1. 0 <= i < j < k < arr.length 2. |arr[i] - arr[j]| <= a 3. |arr[j] - arr[k]| <= b 4. |arr[i] - arr[k]| <= c. Where |x| denotes the absolute value of x.
+//Return the number of good triplets.
+var countGoodTriplets = function (arr, a, b, c) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 29% and memory beats 62% of all submissions
+    let count = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            for (let k = j + 1; k < arr.length; k++) {
+                if (
+                    Math.abs(arr[i] - arr[j]) <= a &&
+                    Math.abs(arr[j] - arr[k]) <= b &&
+                    Math.abs(arr[i] - arr[k]) <= c
+                ) {
+                    count++;
+                }
+            }
+        }
+    }
+
+    return count;
+};
