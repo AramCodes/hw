@@ -1455,3 +1455,116 @@ var countGoodTriplets = function (arr, a, b, c) {
 
     return count;
 };
+
+//A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in
+//non-decreasing order by height. Let this ordering be represented by the integer array expected where expected[i] is the expected
+//height of the ith student in line. You are given an integer array heights representing the current order that the students are
+//standing in. Each heights[i] is the height of the ith student in line (0-indexed). Return the number of indices where
+//heights[i] != expected[i].
+var heightChecker = function (heights) {
+    //passes passes all preliminary tests and allows submission
+    //runtimes beats 66% and memory beats 79% of all submissions
+    let count = 0;
+    const expected = heights.slice().sort((a, b) => a - b);
+
+    for (let i = 0; i < heights.length; i++) {
+        if (heights[i] !== expected[i]) {
+            count++;
+        }
+    }
+
+    return count;
+};
+
+var heightChecker = function (heights) {
+    //passes passes all preliminary tests and allows submission
+    //runtime increase to 71% from 66% and memory decreased from 79% to 70%
+    let count = 0;
+    const expected = heights.slice().sort((a, b) => a - b);
+
+    heights.forEach((height, i) => {
+        if (heights[i] !== expected[i]) {
+            count++;
+        }
+    });
+
+    return count;
+};
+
+//Given an array of positive integers nums, return an array answer that consists of the digits of each integer in nums after
+//separating them in the same order they appear in nums. To separate the digits of an integer is to get all the digits it has
+//in the same order. For example, for the integer 10921, the separation of its digits is [1,0,9,2,1].
+var separateDigits = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 30% and memory beats 33% of all submissions.
+    let digits = nums.toString().split("");
+
+    digits = digits.filter(function (item) {
+        return item !== ",";
+    });
+
+    digits = digits.map(Number);
+
+    return digits;
+};
+
+//use of arrow function instead of function keyword saw massive improvments
+var separateDigits = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime increased from 30% to 83% and memory from 33% to 67%
+    let digits = nums.toString().split("");
+
+    digits = digits.filter((item) => {
+        return item !== ",";
+    });
+
+    digits = digits.map(Number);
+
+    return digits;
+};
+
+//Given two 0-indexed integer arrays nums1 and nums2, return a list answer of size 2 where: answer[0] is a list of all distinct integers in nums1 which are not present in nums2.
+//answer[1] is a list of all distinct integers in nums2 which are not present in nums1. Note that the integers in the lists may be
+//returned in any order.
+var findDifference = function (nums1, nums2) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 6% and memory beats 93%
+    const answer = [[], []];
+    const length = Math.max(nums1.length, nums2.length);
+
+    for (let i = 0; i < length; i++) {
+        if (
+            !nums2.includes(nums1[i]) &&
+            !answer[0].includes(nums1[i]) &&
+            typeof nums1[i] !== "undefined"
+        ) {
+            answer[0].push(nums1[i]);
+        }
+
+        if (
+            !nums1.includes(nums2[i]) &&
+            !answer[1].includes(nums2[i]) &&
+            typeof nums2[i] !== "undefined"
+        ) {
+            answer[1].push(nums2[i]);
+        }
+    }
+
+    return answer;
+};
+//optimized solution but uses set can't use since entered through array problems
+var findDifference = function (nums1, nums2) {
+    //passes all preliminary tests and allows submission
+    //runtime increased from 6% to 85% and memory decreased from 93% to 82%
+    const set1 = new Set(nums1);
+    const set2 = new Set(nums2);
+
+    for (let num of nums1) {
+        if (set2.has(num)) {
+            set1.delete(num);
+            set2.delete(num);
+        }
+    }
+
+    return [[...set1], [...set2]];
+};
