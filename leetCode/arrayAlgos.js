@@ -1666,3 +1666,63 @@ var frequencySort = function (nums) {
         return freqMap.get(a) - freqMap.get(b);
     });
 };
+
+//Given a 0-indexed integer array nums of length n and an integer k, return the number of pairs (i, j) where 0 <= i < j < n, such that
+//nums[i] == nums[j] and (i * j) is divisible by k.
+
+var countPairs = function (nums, k) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 14% and memory beats 84%
+    let count = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = 1; j < nums.length; j++) {
+            if (nums[i] === nums[j] && (i * j) % k === 0 && i < j) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+};
+
+//i+1 instead of 1
+var countPairs = function (nums, k) {
+    //passes all preliminary tests and allows submission
+    //increased runtime from 14% to 75% and decreased memory from 84% to 47%
+    let count = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[i] === nums[j] && (i * j) % k === 0 && i < j) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+};
+
+//You are given the array paths, where paths[i] = [cityAi, cityBi] means there exists a direct path going from cityAi to cityBi. Return
+//the destination city, that is, the city without any path outgoing to another city. It is guaranteed that the graph of paths forms a
+//line without any loop, therefore, there will be exactly one destination city.
+var destCity = function (paths) {
+    //passes all preliminary test but doesn't allow submissions
+    //runtime beats 59% and memory beats 97% of all submissions.
+    while (paths.length > 1) {
+        const head = paths.shift();
+
+        for (let i = 0; i < paths.length; i++) {
+            if (head[0] === paths[i][1]) {
+                paths[i][1] = head[1];
+                break;
+            }
+
+            if (head[1] === paths[i][0]) {
+                paths[i][0] = head[0];
+                break;
+            }
+        }
+    }
+    return paths[0][1];
+};
