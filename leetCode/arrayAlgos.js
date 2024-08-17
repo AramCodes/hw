@@ -1568,3 +1568,101 @@ var findDifference = function (nums1, nums2) {
 
     return [[...set1], [...set2]];
 };
+
+//Given an n x n binary matrix image, flip the image horizontally, then invert it, and return the resulting image. To flip an image
+//horizontally means that each row of the image is reversed. For example, flipping [1,1,0] horizontally results in [0,1,1]. To invert
+//an image means that each 0 is replaced by 1, and each 1 is replaced by 0. For example, inverting [0,1,1] results in [1,0,0].
+var flipAndInvertImage = function (image) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 89% and memory beats 70% of submissions.
+    for (let i = 0; i < image.length; i++) {
+        for (let j = 0; j < image[i].length; j++) {
+            image[i].reverse();
+
+            if (image[i][j] === 0) {
+                image[i][j] = 1;
+            } else if (image[i][j] === 1) {
+                image[i][j] = 0;
+            }
+        }
+    }
+
+    return image;
+};
+
+//You are given a 0-indexed integer array batteryPercentages having length n, denoting the battery percentages of n 0-indexed devices. Your task is to test each device i in
+//order from 0 to n - 1, by performing the following test operations: If batteryPercentages[i] is greater than 0: 1. Increment the count of tested devices. 2. Decrease the
+//battery percentage of all devices with indices j in the range [i + 1, n - 1] by 1, ensuring their battery percentage never goes below 0, i.e, batteryPercentages[j] =
+//max(0, batteryPercentages[j] - 1). 3. Move to the next device. 4. Otherwise, move to the next device without performing any test. 5. Return an integer denoting the number
+//of devices that will be tested after performing the test operations in order.
+var countTestedDevices = function (batteryPercentages) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 21% and memory beats 13%of all submission. major room for improvement
+    let count = 0;
+
+    for (let i = 0; i < batteryPercentages.length; i++) {
+        if (batteryPercentages[i] > 0) {
+            count++;
+            for (let j = i + 1; j < batteryPercentages.length; j++) {
+                batteryPercentages[j] = Math.max(0, batteryPercentages[j] - 1);
+            }
+        }
+    }
+
+    return count;
+};
+
+// switched outter loop to a for each and saw drastic improvements
+var countTestedDevices = function (batteryPercentages) {
+    //passes all preliminary tests and allows submission
+    //runtime increased to 50% from 21% and memory increased to 73% from 13%
+    let count = 0;
+
+    batteryPercentages.forEach((percentatge, i) => {
+        if (batteryPercentages[i] > 0) {
+            count++;
+            for (let j = i + 1; j < batteryPercentages.length; j++) {
+                batteryPercentages[j] = Math.max(0, batteryPercentages[j] - 1);
+            }
+        }
+    });
+
+    return count;
+};
+
+//using pertage parameter further increased ranking
+var countTestedDevices = function (batteryPercentages) {
+    //passes all preliminary tests and allows submission
+    //runtime increased to 80% from 50% and memory decreased to 73% from 69%
+    let count = 0;
+
+    batteryPercentages.forEach((percentatge, i) => {
+        if (percentatge > 0) {
+            count++;
+            for (let j = i + 1; j < batteryPercentages.length; j++) {
+                batteryPercentages[j] = Math.max(0, batteryPercentages[j] - 1);
+            }
+        }
+    });
+
+    return count;
+};
+
+//Given an array of integers nums, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in
+//decreasing order. Return the sorted array.
+var frequencySort = function (nums) {
+    //passes all preliminary tests and allows submission
+    //runtime beats 74% and memory beats 60% of all submissions
+    const freqMap = new Map();
+
+    for (let num of nums) {
+        freqMap.set(num, (freqMap.get(num) || 0) + 1);
+    }
+
+    return nums.sort((a, b) => {
+        if (freqMap.get(a) === freqMap.get(b)) {
+            return b - a;
+        }
+        return freqMap.get(a) - freqMap.get(b);
+    });
+};
