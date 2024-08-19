@@ -1726,3 +1726,81 @@ var destCity = function (paths) {
     }
     return paths[0][1];
 };
+
+//Given an integer array hours representing times in hours, return an integer denoting the number of pairs i, j where i < j and
+//hours[i] + hours[j] forms a complete day. A complete day is defined as a time duration that is an exact multiple of 24 hours. For
+//example, 1 day is 24 hours, 2 days is 48 hours, 3 days is 72 hours, and so on.
+var countCompleteDayPairs = function (hours) {
+    //passes all preliminary test but doesn't allow submissions
+    //runtime beats 12% and memory beats 68% of all submissions.
+    let count = 0;
+
+    for (let i = 0; i < hours.length; i++) {
+        for (let j = i + 1; j < hours.length; j++) {
+            if ((hours[i] + hours[j]) % 24 === 0) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+};
+
+//A permutation perm of n + 1 integers of all the integers in the range [0, n] can be represented as a string s of length n where:
+//s[i] == 'I' if perm[i] < perm[i + 1], and s[i] == 'D' if perm[i] > perm[i + 1]. Given a string s, reconstruct the permutation perm
+//and return it. If there are multiple valid permutations perm, return any of them.
+var diStringMatch = function (s) {
+    //passes all preliminary test but doesn't allow submissions
+    //runtime beats 57% and memory beats 87% of all submissions.
+    let low = 0;
+    let high = s.length;
+    const out = [];
+
+    for (let i = 0; i < s.length + 1; i++) {
+        if (s[i] === "I") {
+            out[i] = low;
+            low++;
+        } else {
+            out[i] = high;
+            high--;
+        }
+    }
+
+    return out;
+};
+
+//You are given an integer array nums (0-indexed). In one operation, you can choose an element of the array and increment it by 1. For
+//example, if nums = [1,2,3], you can choose to increment nums[1] to make nums = [1,3,3]. Return the minimum number of operations
+//needed to make nums strictly increasing. An array nums is strictly increasing if nums[i] < nums[i+1] for all 0 <= i <
+//nums.length - 1. An array of length 1 is trivially strictly increasing.
+var minOperations = function (nums) {
+    //passes all preliminary test but doesn't allow submissions
+    //runtime beats 36% and memory beats 99.29% of all submissions.
+    let count = 0;
+
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] <= nums[i - 1]) {
+            count += nums[i - 1] - nums[i] + 1;
+            nums[i] = nums[i - 1] + 1;
+        }
+    }
+
+    return count;
+};
+
+var minOperations = function (nums) {
+    //passes all preliminary test but doesn't allow submissions
+    //runtime beats 63% and memory beats 43% of all submissions.
+    let count = 0;
+    let dif;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] >= nums[i + 1]) {
+            dif = Math.abs(nums[i + 1] - nums[i]);
+            count += dif + 1;
+            nums[i + 1] += dif + 1;
+        }
+    }
+
+    return count;
+};
