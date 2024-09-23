@@ -1804,3 +1804,21 @@ var minOperations = function (nums) {
 
     return count;
 };
+
+//remover math.abs and switch position to make memory gains
+var minOperations = function (nums) {
+    //passes all preliminary test but doesn't allow submissions
+    //runtime beats 63% and memory beats 53% from 43% of all submissions.
+    let count = 0;
+    let dif;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] >= nums[i + 1]) {
+            dif = nums[i] - nums[i + 1];
+            count += dif + 1;
+            nums[i + 1] += dif + 1;
+        }
+    }
+
+    return count;
+};
