@@ -396,3 +396,138 @@ public class ReplaceNegatives {
         System.out.println();
     }
 }
+
+//Integer arrays busNumbers and distanceTraveled are read from input, containing the numbers and distance traveled of each bus.
+//Initialize variable count with 0. For each bus, increment count if a bus meets both of the following conditions: Number is less than
+//150. Distance traveled is an even integer. Lastly, output count followed by a newline. Ex: For the input:
+// 178 141 124 179 164
+// 11 24 34 41 29
+// then the output is:
+// 2
+
+public class CombineArrays {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        final int NUM_VALS = 5;
+        int[] busNumbers = new int[NUM_VALS];
+        int[] distanceTraveled = new int[NUM_VALS];
+        int i; 
+        int count;
+ 
+        for (i = 0; i < NUM_VALS; ++i) {
+            busNumbers[i] = scnr.nextInt();
+        }
+ 
+        for (i = 0; i < NUM_VALS; ++i) {
+            distanceTraveled[i] = scnr.nextInt();
+        }
+ 
+        count = 0;
+        for (i = 0; i < NUM_VALS; i++) {
+            if (busNumbers[i] < 150 && distanceTraveled[i] % 2 == 0) {
+                ++count;   
+            }
+        }
+       
+        System.out.println(count);
+    }
+};
+
+//Integer numValues is read from input, representing the number of integers to be read next. Then, the remaining integers are read and 
+//stored into array wagesList. For each element in wagesList that is less than 120: Output the element, followed by " is corrected to 
+//twice the current value" and a newline. Assign the element with twice the element's current value. Ex: If the input is:
+//3
+//10 255 115
+//then the output is:
+//Raw wages: 10 255 115 
+//10 is corrected to twice the current value
+//115 is corrected to twice the current value
+//Adjusted wages: 20 255 230 
+
+public class ArrayUpdate {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int[] wagesList;
+        int numValues;
+        int i;
+   
+        numValues = scnr.nextInt();
+   
+        wagesList = new int[numValues];
+   
+        for (i = 0; i < wagesList.length; ++i) {
+            wagesList[i] = scnr.nextInt();
+        }
+   
+        System.out.print("Raw wages: ");
+        for (i = 0; i < wagesList.length; ++i) {
+           System.out.print(wagesList[i] + " ");
+        }
+        System.out.println();
+
+        for(i = 0; i < wagesList.length; i++){
+            if(wagesList[i] < 120) {
+                System.out.println(wagesList[i] + " is corrected to twice the current value"); 
+                wagesList[i] *= 2;
+            }
+        }
+
+        System.out.print("Adjusted wages: ");
+        for (i = 0; i < wagesList.length; ++i) {
+            System.out.print(wagesList[i] + " ");
+        }
+
+        System.out.println();
+    }
+}
+
+//Integer numValues is read from input, representing the number of integers to be read next. Then, the remaining integers are read and stored into array wagesList. 
+//Initialize the array newList to be half the size of wagesList. Write a loop that iterates through newList and:If the corresponding element in the first half of 
+//wagesList is less than 115, then assign the element in newList with the corresponding element in the first half of wagesList. Otherwise, assign the element in newList with 0.
+// Ex: If the input is:
+// 4
+// 135 85 95 125
+// then the output is:
+// Original wages: 135 85 95 125 
+// First half of the wages: 0 85 
+// Note: Input array always has an even number of elements.
+
+public class Wage {
+    public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int[] wagesList;
+      int[] newList;
+      int numValues;
+      int i;
+   
+      numValues = scnr.nextInt();
+      
+      wagesList = new int[numValues];
+   
+      for (i = 0; i < wagesList.length; ++i) {
+         wagesList[i] = scnr.nextInt();
+      }
+
+      newList = new int[numValues / 2] ;
+      
+        for (i = 0; i <= newList.length / 2; i++){
+            if(wagesList[i] < 115) {
+                newList[i] = wagesList[i];         
+            } else if (newList[i] >= 115) {
+                newList[i] = 0;  
+            } 
+        }
+
+        System.out.print("Original wages: ");
+        for (i = 0; i < wagesList.length; ++i) {
+            System.out.print(wagesList[i] + " ");
+        }
+        System.out.println();
+      
+        System.out.print("First half of the wages: ");      
+        for (i = 0; i < newList.length; ++i) {
+            System.out.print(newList[i] + " ");
+        }
+        System.out.println();
+    }
+}
