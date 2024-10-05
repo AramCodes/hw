@@ -531,3 +531,95 @@ public class Wage {
         System.out.println();
     }
 }
+
+//Write a loop to iterate from 0 to the last row of milesTracker. Within each row, use a nested loop to iterate from 0 to the last column of milesTracker. Within the nested 
+//loop, if an element is greater than maxMiles, assign maxMiles with the value of the element. Similarly, if an element is less than minMiles, assign minMiles with the value 
+//of the element.
+// Ex: If the input is: -10 20 30 40 the output is:
+// Min miles: -10
+// Max miles: 40
+
+public class ArraysKeyValue {
+   public static void main (String [] args) {
+        Scanner scnr = new Scanner(System.in);
+        final int NUM_ROWS = 2;
+        final int NUM_COLS = 2;
+        int [][] milesTracker = new int[NUM_ROWS][NUM_COLS];
+        int i;
+        int j;
+        int maxMiles;
+        int minMiles;
+
+        for (i = 0; i < milesTracker.length; i++){
+            for (j = 0; j < milesTracker[i].length; j++){
+                milesTracker[i][j] = scnr.nextInt();
+            }
+        }
+
+      maxMiles = milesTracker[0][0];
+      minMiles = milesTracker[0][0];
+
+       for (i = 0; i < NUM_ROWS; i++){
+           for(j = 0; j < NUM_COLS; j++ ) {
+                if(milesTracker[i][j] > maxMiles){
+                 maxMiles = milesTracker[i][j];      
+                } else if (milesTracker[i][j] < minMiles ){
+                   minMiles = milesTracker[i][j];
+                }  
+            }
+        }
+
+      System.out.println("Min miles: " + minMiles);
+      System.out.println("Max miles: " + maxMiles);
+    }
+}
+
+//Write a program that reads a list of integers and outputs those integers in reverse. The input begins with an integer indicating the number of integers that follow. 
+//For coding simplicity, follow each output integer by a comma, including the last one. Assume that the list will always contain fewer than 20 integers. Ex: If the input is:
+//5 2 4 6 8 10
+// the output is:
+// 10,8,6,4,2,
+
+public class LabProgram {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int numElements;                 // Number of integers in user's list
+      numElements = scnr.nextInt();   // Input begins with number of integers that follow
+      int[] userList = new int[numElements];   // List of numElement integers specified by the user
+      int i;
+      
+      for (i = 0; i < userList.length; i++){
+         userList[i] = scnr.nextInt();   // reads all inputs into array    
+      }
+      
+      for(i = numElements - 1; i >= 0; i--){
+         System.out.print(userList[i] + ",");  
+      }
+      System.out.println();
+   }
+}
+
+//
+public class LabProgram {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int[] userValues = new int[9];  // Set of data specified by the user
+      double midVal = 0.00;
+      
+      for (int i= 0; i < userValues.length; i++) {
+         if( userValues[i] >= 0){
+            userValues[i] = scnr.nextInt();   
+         }
+      }
+
+      if(userValues.length <= 9 && userValues.length > 0) {
+         midVal = userValues.length / 2;
+      } else {
+         System.out.println("Too many numbers");   
+      }
+      
+      
+      System.out.print("Middle item: " + midVal);
+   }
+}
+
