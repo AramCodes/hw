@@ -623,3 +623,70 @@ public class LabProgram {
    }
 }
 
+public class ModifyArray {
+
+    static void modifyArray(int[] arr, int chosen){
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] >= chosen) {
+                arr[i] = 1;   
+            } else {
+                arr[i] = -1;   
+            }   
+        }   
+    }
+
+    public static void printArr(int[] arr) {
+        int i;
+
+        for (i = 0; i < arr.length; ++i) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        final int NUM_ELEM = 6;
+        int[] myArray = new int[NUM_ELEM];
+        int i;
+        int numCompare;
+
+        for (i = 0; i < myArray.length; ++i) {
+           myArray[i] = scnr.nextInt();
+        }
+
+        numCompare = scnr.nextInt();
+
+        System.out.print("Initial array: ");
+        printArr(myArray);
+
+        modifyArray(myArray, numCompare);
+
+        System.out.print("Final array: ");
+        printArr(myArray);
+    }
+}
+
+public class BookshelfHeight {
+   public static void printBookshelfHeight(int bookshelfHeight) {
+      System.out.println("Bookshelf height as a whole number: " + bookshelfHeight + " centimeters");
+   }
+
+   public static void printBookshelfHeight(double bookshelfHeight){
+      System.out.print("Bookshelf height to one decimal place: ");
+      System.out.printf("%.1f", bookshelfHeight);
+      System.out.println(" centimeters");
+   }
+
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int bookshelfHeight1;
+      double bookshelfHeight2;
+      
+      bookshelfHeight1 = scnr.nextInt();
+      bookshelfHeight2 = scnr.nextDouble();
+      
+      printBookshelfHeight(bookshelfHeight1);
+      printBookshelfHeight(bookshelfHeight2);
+   }
+}
