@@ -690,3 +690,95 @@ public class BookshelfHeight {
       printBookshelfHeight(bookshelfHeight2);
    }
 }
+
+public class GardenInventory {
+   public static int[] resupplySeed(int[] stock) {
+      int[] newArr = new int[stock.length];
+      
+      for(int i = 0; i < stock.length; i++) {
+         newArr[i] = stock[i] * 2;
+      }
+
+      return newArr;
+   }
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int[] seedStock = new int[4];
+        int[] arr;
+        int i;
+
+        for (i = 0; i < seedStock.length; ++i) {
+            seedStock[i] = scnr.nextInt();
+        }
+
+        arr = resupplySeed(seedStock);
+
+        for (i = 0; i < arr.length; ++i) {
+            System.out.print(arr[i] + " ");
+        }
+
+        // Check if the array returned by resupplySeed() is a copy of seedStock
+        if (arr == seedStock) {
+            System.out.println("\nA new array was not returned.");
+        }
+    }
+}
+
+// half custom hall predefined algo to reverse a sorted array
+public static void sortArray(int[] arr){
+    Arrays.sort(arr);
+      
+    for (int i = 0; i < arr.length / 2; ++i) {
+        int temp = arr[i];
+        arr[i] = arr[arr.length - i - 1];
+        arr[arr.length - i - 1] = temp;
+    } 
+}
+
+//Define a method named sortArray that takes an array of integers as a parameter. Method sortArray() modifies the array 
+//parameter by sorting the elements in descending order (highest to lowest). Then write a main program that reads a list 
+//of integers from input, stores the integers (starting from the second input) in an array, calls sortArray(), and 
+//outputs the sorted array. The first input integer indicates how many numbers are in the list. Assume that the list 
+//will always contain less than 20 integers.
+
+//Ex: If the input is:
+
+//5 10 4 39 12 2
+//the output is:
+
+//39,12,10,4,2,
+//For coding simplicity, follow every output value by a comma, including the last one.
+public class LabProgram {
+
+   public static void sortArray(int[] arr){
+        Arrays.sort(arr);
+      
+        for (int i = 0; i < arr.length / 2; ++i) {
+            int temp = arr[i];
+            arr[i] = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = temp;
+        } 
+    }
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int limit = scnr.nextInt();
+        int[] arr = new int[limit];
+      
+        for(int i = 0; i < arr.length; i++) {
+            arr[i] = scnr.nextInt();
+        }
+      
+        sortArray(arr);
+      
+        for (int i = 0; i < arr.length; ++i) {
+            if(i < limit - 1) {
+                System.out.print(arr[i] + ",");
+            } else {
+                System.out.println(arr[i] + ",");   
+            }
+        }
+    }
+}
+
