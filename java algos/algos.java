@@ -783,48 +783,242 @@ public class LabProgram {
 }
 
 public class Play {
-   private String title;
+    private String title;
 	private String author;
    
-   public Play() { // Default constructor
-      title = "Unspecified";
+    public Play() { // Default constructor
+        title = "Unspecified";
 		author = "NoName";
-   }
+    }
 
-   public Play(String tit,  String auth) { // Overloaded constructor number 1
-      title = tit;
+    public Play(String tit,  String auth) { // Overloaded constructor number 1
+        title = tit;
 		author = auth;
-   }
+    }
 
-   public void print() {
-      System.out.println("Play: " + title + ", " + author);
-   }
+    public void print() {
+        System.out.println("Play: " + title + ", " + author);
+    }
 }
 
 public class Animal {
-   private String type;
-   private String color;
-   private int age;
+    private String type;
+    private String color;
+    private int age;
    
-   public Animal() { // Default constructor
-      type = "None";
-      color = "Undefined";
-      age = -1;
-   }
+    public Animal() { // Default constructor
+        type = "None";
+        color = "Undefined";
+        age = -1;
+    }
 
-   public Animal(String ty, int ag) { // Overloaded constructor number 1
-      type = ty;
-      color = "Blue";
-      age = ag;
-   }
+    public Animal(String ty, int ag) { // Overloaded constructor number 1
+        type = ty;
+        color = "Blue";
+        age = ag;
+    }
 
-   public Animal(String ty, String col, int ag) { // Overloaded constructor number 2
-      type = ty;
-      color = col;
-      age = ag;
-   }
+    public Animal(String ty, String col, int ag) { // Overloaded constructor number 2
+        type = ty;
+        color = col;
+        age = ag;
+    }
 
-   public void print() {
-      System.out.println("Animal: " + type + ", " + color + ", " + age);
+    public void print() {
+        System.out.println("Animal: " + type + ", " + color + ", " + age);
+    }
+}
+
+import java.util.ArrayList;
+
+public class MakeLengthList {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int numLengths;
+        int i;
+        ArrayList<Integer> lengthList = new ArrayList<Integer>();//1
+      
+        numLengths = scnr.nextInt();//2
+      
+        for(i = 0; i < numLengths; i++){
+            lengthList.add(2 * i + 2);
+        }
+      
+        // Traversing a list using indexes
+        for (i = 0; i < lengthList.size(); ++i) {
+            System.out.print(lengthList.get(i) + " ");
+        }
+
+        System.out.println();
+    }
+}
+
+
+Integer numWeights is read from input. Then, numWeights integers are read from input and inserted at the end of weightList. Assign sumOfWeights with the sum of all the elements in weightList.
+
+Ex: If the input is:
+
+2
+35 21
+
+then the output is:
+
+56
+
+
+public class WeightListSum {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<Integer> weightList = new ArrayList<Integer>();
+        int numWeights;
+		int sumOfWeights;
+        int i;
+      
+        numWeights = scnr.nextInt();
+        for (i = 0; i < numWeights; ++i) {
+            weightList.add(scnr.nextInt());
+        }
+
+        sumOfWeights = 0;
+        for (i = 0; i < weightList.size(); ++i) {
+            sumOfWeights += weightList.get(i);
+        }
+
+        System.out.println(sumOfWeights);
+    }
+}
+
+Integer numWeights is read from input. Then, numWeights integers are read from input and inserted at the end of weightList. If an element is at an odd index in weightList, negate the element.
+
+Ex: If the input is:
+
+2
+47 33
+
+then the output is:
+
+47 -33 
+
+Note: Index i is odd if i % 2 != 0.
+
+public class WeightListModification {
+   public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<Integer> weightList = new ArrayList<Integer>();
+        int numWeights;
+        int i;
+      
+        numWeights = scnr.nextInt();
+        for (i = 0; i < numWeights; ++i) {
+            weightList.add(scnr.nextInt());
+        }
+
+        for (i = 0; i < numWeights; ++i) {
+            if( i % 2 != 0) {
+                weightList.set(i, weightList.get(i) * -1);
+            }
+        }
+
+        for (i = 0; i < weightList.size(); ++i) {
+            System.out.print(weightList.get(i) + " ");
+        }
+
+        System.out.println();
+    }
+}
+
+//Example of the implmentation of a backend comment system
+public class Review {
+   private int rating = -1;
+   private String comment = "NoComment";
+   
+   public void setRatingAndComment(int revRating, String revComment) {
+      rating = revRating;
+      comment = revComment;
    }
+   public int getRating() { return rating; }
+   public String getComment() { return comment; }
+}
+
+
+public class ReviewSystem {
+ 
+    public static void main(String [] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<Review> reviewList = new ArrayList<Review>();
+        Review currReview;
+        int currRating;
+        String currComment;
+        int i;
+   
+        System.out.println("Type rating + comments. To end: -1");
+        currRating = scnr.nextInt();
+        while (currRating >= 0) {
+           currReview = new Review();
+           currComment = scnr.nextLine(); // Gets rest of line
+           currReview.setRatingAndComment(currRating, currComment);
+           reviewList.add(currReview);
+           currRating = scnr.nextInt();
+        }
+   
+        // Output all comments for given rating
+        System.out.println();
+        System.out.println("Type rating. To end: -1");
+        currRating = scnr.nextInt(); 
+
+       while (currRating != -1) {
+            for (i = 0; i < reviewList.size(); ++i) {
+                currReview = reviewList.get(i);
+
+                if (currRating == currReview.getRating()) {
+                   System.out.println(currReview.getComment());
+                }
+            }
+
+            currRating = scnr.nextInt();
+        }
+    }
+}
+
+public class Restaurant {
+    private String name;
+    private Reviews reviews = new Reviews();
+   
+    public void setName(String restaurantName) {
+        name = restaurantName;
+    }
+      
+    public void readAllReviews(Scanner scnr) {
+        System.out.println("Type ratings + comments. To end: -1");
+        reviews.inputReviews(scnr);
+    }
+   
+    public void printCommentsByRating() { 
+        int i;
+      
+        System.out.println("Comments for each rating level: ");
+        for (i = 1; i <= 5; ++i) {
+            System.out.println(i + ":");
+            reviews.printCommentsForRating(i);
+        }
+    }
+}
+
+public class RestaurantReviews {
+ 
+    public static void main (String [] args) {
+        Scanner scnr = new Scanner(System.in);
+        Restaurant ourPlace = new Restaurant();
+        String currName;
+   
+        System.out.println("Type restaurant name: ");
+        currName = scnr.nextLine();
+        ourPlace.setName(currName);
+        System.out.println();
+   
+        ourPlace.readAllReviews(scnr);
+        System.out.println();
+   
+        ourPlace.printCommentsByRating();
+    }
 }
