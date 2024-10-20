@@ -782,3 +782,49 @@ public class LabProgram {
     }
 }
 
+public class Play {
+   private String title;
+	private String author;
+   
+   public Play() { // Default constructor
+      title = "Unspecified";
+		author = "NoName";
+   }
+
+   public Play(String tit,  String auth) { // Overloaded constructor number 1
+      title = tit;
+		author = auth;
+   }
+
+   public void print() {
+      System.out.println("Play: " + title + ", " + author);
+   }
+}
+
+public class Animal {
+   private String type;
+   private String color;
+   private int age;
+   
+   public Animal() { // Default constructor
+      type = "None";
+      color = "Undefined";
+      age = -1;
+   }
+
+   public Animal(String ty, int ag) { // Overloaded constructor number 1
+      type = ty;
+      color = "Blue";
+      age = ag;
+   }
+
+   public Animal(String ty, String col, int ag) { // Overloaded constructor number 2
+      type = ty;
+      color = col;
+      age = ag;
+   }
+
+   public void print() {
+      System.out.println("Animal: " + type + ", " + color + ", " + age);
+   }
+}
