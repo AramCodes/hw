@@ -1022,3 +1022,549 @@ public class RestaurantReviews {
         ourPlace.printCommentsByRating();
     }
 }
+
+//The program first reads integer lectureCount from input, representing the number of pairs of inputs to be read. Each pair has a 
+//string and an integer, representing the lecture's topic and duration, respectively. One Lecture object is created for each pair 
+//and added to ArrayList lectureList. Output "Smallest lecture duration: ", followed by the smallest duration of all the Lecture 
+//objects and a newline.
+//Ex: If the input is:
+
+//3
+//Travel 50 Education 55 Culture 25
+//then the output is:Smallest lecture duration: 25 Note: The ArrayList has at least one element.
+
+public class Lecture {
+    private String topic;
+    private int duration;
+
+    public void setDetails(String topic, int duration) {
+        this.topic = topic;
+        this.duration = duration;
+    }
+
+	public int getDuration() {
+	    return duration;
+	}
+}
+
+public class Lectures {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<Lecture> lectureList = new ArrayList<Lecture>();
+        Lecture currLecture;
+        String currTopic;
+        int currDuration;
+		int smallestDuration;
+        int lectureCount;
+        int i;
+
+        lectureCount = scnr.nextInt();
+        for (i = 0; i < lectureCount; ++i) {
+            currTopic = scnr.next();
+            currDuration = scnr.nextInt();
+
+            currLecture = new Lecture();
+            currLecture.setDetails(currTopic, currDuration);
+            lectureList.add(currLecture);
+        }
+		
+		smallestDuration = lectureList.get(0).getDuration();
+
+        for (i = 0; i < lectureCount; ++i) {
+            if(lectureList.get(i).getDuration() < smallestDuration){
+                smallestDuration = lectureList.get(i).getDuration();;
+
+            }    
+        }
+            
+        System.out.println("Smallest lecture duration: " + smallestDuration);
+
+    }
+}
+
+import java.util.ArrayList;
+
+public class IntegerManager {
+    public static void printItems(ArrayList<Integer> numsList) {
+      int i;
+
+      System.out.print("items:");
+
+      for (i = 0; i < numsList.size(); ++i) {
+         System.out.print(" " + numsList.get(i));
+      }
+
+      System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int i;
+        ArrayList<Integer> intList = new ArrayList<Integer>();
+
+        for (i = 0; i < 4; ++i) {
+            intList.add(i);
+        }
+
+        printItems(intList);
+
+        intList.add(2, 5);
+        printItems(intList);
+
+        intList.remove(1);
+        printItems(intList);
+    }
+}
+
+public class Purchase {
+   private char option;
+   private String food;
+
+	public void readDetails(Scanner scnr) {
+		option = scnr.next().charAt(0);
+		food = scnr.next();
+	}
+
+   public void print() {
+      System.out.println("Purchase option: " + option + ", Food: " + food);
+   }
+}
+
+public class Purchases {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<Purchase> purchaseList = new ArrayList<Purchase>();
+        Purchase currPurchase;
+        int entryNumber;
+        int i;
+        entryNumber = scnr.nextInt();
+
+        while(entryNumber != -99){
+            currPurchase = new Purchase();
+            currPurchase.readDetails(scnr);
+            purchaseList.add( currPurchase );
+   
+            entryNumber = scnr.nextInt();
+        }
+
+
+        for (i = 0; i < purchaseList.size(); ++i) {
+            currPurchase = purchaseList.get(i);
+            currPurchase.print();
+        }
+    }
+}
+
+public class Visitor {
+    private static boolean debugMode = false;
+    private String name;
+   
+    public Visitor(String newName) {
+        if (debugMode) {
+			System.out.println("Debug mode ON: Visitor's constructor called");
+		}
+
+		name = newName;
+    }
+	
+	public void print() {
+		if (debugMode) {
+			System.out.println("Debug mode ON: print() called");
+		}
+		System.out.println("Visitor is " + name + ".");
+	}
+
+    public static void toggleDebugMode() {
+        debugMode = !debugMode;
+    }
+
+
+}
+
+// The program first reads integer licenseCount from input, representing the number of pairs of inputs to be read. Each pair has a string 
+// and an integer, representing the license's state and fee, respectively. One License object is created for each pair and added to 
+// ArrayList licenseList. Write the findAverageLicenseFee() method in the Directory class to return the average fee of all the License 
+// objects as an integer. Ex: If the input is: 4
+// WI 123 SC 125 OR 215 CA 145
+
+// then the output is:
+
+// Average license fee: 152
+
+// Note: The ArrayList has at least one element.
+
+public class LicenseSystem {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        Directory directory = new Directory();
+
+        directory.inputLicenses(scnr);
+        System.out.println("Average license fee: " + directory.findAverageLicenseFee());
+    }
+}
+
+public class License {
+    private String state;
+    private int fee;
+
+    public void setDetails(String state, int fee) {
+        this.state = state;
+        this.fee = fee;
+    }
+
+    public int getFee() {
+        return fee;
+    }
+}
+
+public class Directory {
+    private ArrayList<License> licenseList = new ArrayList<License>();
+
+    public void inputLicenses(Scanner scnr) {
+        License currLicense;
+        String currState;
+        int currFee;
+        int licenseCount;
+        int i;
+
+        licenseCount = scnr.nextInt();
+        for (i = 0; i < licenseCount; ++i) {
+            currState = scnr.next();
+            currFee = scnr.nextInt();
+            currLicense = new License();
+            currLicense.setDetails(currState, currFee);
+            licenseList.add(currLicense);
+        }
+    }
+
+    public int findAverageLicenseFee(){
+        int avgFee;
+        int total = 0;
+
+        for(int i = 0; i < licenseList.size(); i++ ){
+            total +=  licenseList.get(i).getFee();
+        }
+
+        avgFee = total / licenseList.size();
+ 
+        return avgFee;
+    }
+
+}
+
+// Write the inputPurchases() method in the Deliveries class. Within inputPurchases(), repeat the following until currPurchase's readDetails() method returns false:
+//Assign currPurchase with a new Purchase object. Use currPurchase's readDetails() method to read each pair of inputs, integer quantity and string food.
+//If currPurchase's readDetails() method returns true, append currPurchase to ArrayList purchaseList. Ex: If the input is 7 mango 2 ginger 15 potato -99, then the output is:
+
+// Purchase quantity: 7, Food: mango
+// Purchase quantity: 2, Food: ginger
+// Purchase quantity: 15, Food: potato
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class PurchaseSystem {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        Deliveries deliveries = new Deliveries();
+
+        deliveries.inputPurchases(scnr);
+        deliveries.printPurchases();
+    }
+}
+
+public class Deliveries {
+   private ArrayList<Purchase> purchaseList = new ArrayList<Purchase>();
+
+    public void inputPurchases(Scanner scnr) {
+        Purchase currPurchase;
+        while (true) {
+            currPurchase = new Purchase();
+            if (!currPurchase.readDetails(scnr)) {
+                break; // Exit if readDetails returns false
+            }
+            purchaseList.add(currPurchase);
+        }
+    }
+
+   public void printPurchases() {
+      Purchase currPurchase;
+      int i;
+
+      for (i = 0; i < purchaseList.size(); ++i) {
+         currPurchase = purchaseList.get(i);
+         currPurchase.print();
+      }
+   }
+}
+
+public class Purchase {
+    private int quantity;
+    private String food;
+
+	public boolean readDetails(Scanner scnr) {
+		int newQuantity;
+		
+		newQuantity = scnr.nextInt();
+		if (newQuantity == -99) {
+			return false;
+		}
+		else {
+			quantity = newQuantity;
+			food = scnr.next();
+			return true;
+		}
+	}
+
+    public void print() {
+        System.out.println("Purchase quantity: " + quantity + ", Food: " + food);
+    }
+}
+
+public class Triangle {
+    private double base;
+    private double height;
+   
+    public void setBase(double userBase){
+        base = userBase;
+    }
+    public void setHeight(double userHeight) {
+        height = userHeight;
+    }
+   
+    public double getArea() {
+        double area = 0.5 * base * height;
+        return area;
+    }
+   
+    public void printInfo() {
+        System.out.printf("Base: %.2f\n", base);
+        System.out.printf("Height: %.2f\n", height);
+        System.out.printf("Area: %.2f\n", getArea());
+    }
+}
+
+public class TriangleArea {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+      
+        Triangle triangle1 = new Triangle();
+        Triangle triangle2 = new Triangle();
+
+        triangle1.setBase(scnr.nextDouble() );
+        triangle1.setHeight(scnr.nextDouble());
+    
+        triangle2.setBase(scnr.nextDouble());
+        triangle2.setHeight(scnr.nextDouble());
+      
+        System.out.println("Triangle with smaller area:");
+        
+      
+        // TODO: Determine smaller triangle (use getArea())
+        //       and output smaller triangle's info (use printInfo())
+        if(triangle1.getArea() < triangle2.getArea()){
+            triangle1.printInfo();
+        }else if(triangle2.getArea() < triangle1.getArea()){
+            triangle2.printInfo();
+        }
+    }
+}
+
+// Given main(), define the Team class (in file Team.java). For class method getWinPercentage(), the formula is: wins / (wins + losses). Note: Use 
+// casting to prevent integer division. For class method printStanding(), output the win percentage of the team with two digits after the decimal 
+// point and whether the team has a winning or losing average. A team has a winning average if the win percentage is 0.5 or greater.
+
+// Ex: If the input is:
+
+// Ravens
+// 13
+// 3 
+// where Ravens is the team's name, 13 is the number of team wins, and 3 is the number of team losses, the output is:
+
+// Win percentage: 0.81
+// Congratulations, Team Ravens has a winning average!
+// Ex: If the input is:
+
+// Angels
+// 80
+// 82
+// the output is:
+
+// Win percentage: 0.49
+// Team Angels has a losing average.
+
+public class WinningTeam {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+      
+        Team team = new Team();
+      
+        String name = scnr.next();
+        int wins = scnr.nextInt();
+        int losses = scnr.nextInt();
+      
+        team.setName(name);
+        team.setWins(wins);
+        team.setLosses(losses);
+      
+        team.printStanding();
+    }
+}
+
+public class Team {
+   
+    private String name;
+    private int wins;
+    private int losses;
+   
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setWins(int wins){
+        this.wins = wins;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+   
+    public String getName() {
+        return name;
+    }
+   
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }  
+   
+    public double getWinPercentage() {
+        return (double) wins / (wins + losses);
+    }
+   
+  
+    public void printStanding() {
+        System.out.print("Win percentage: ");
+        System.out.printf("%.2f", getWinPercentage());
+        System.out.println();
+
+        if( wins > losses){
+            System.out.println("Congratulations, Team " + name + " has a winning average!");
+        } else if (wins < losses){
+            System.out.println("Team " + name + " has a losing average.");
+        }
+    }
+   
+}
+
+// Given main(), complete the FoodItem class (in file FoodItem.java) with constructors to initialize each food item. The default constructor should initialize
+// the name to "Water" and all other fields to 0.0. The second constructor should have four parameters (food name, grams of fat, grams of carbohydrates, and 
+// grams of protein) and should assign each private field with the appropriate parameter value.
+
+// Ex: If the input is: Water  then the output is:
+
+// Nutritional information per serving of Water:
+//   Fat: 0.00 g
+//   Carbohydrates: 0.00 g
+//   Protein: 0.00 g
+// Number of calories for 1.00 serving(s): 0.00
+// Ex: If the input is:
+
+// M&M's
+// 10.0
+// 34.0
+// 2.0
+// 3.0
+// where M&M's is the food name, 10.0 is the grams of fat, 34.0 is the grams of carbohydrates, 2.0 is the grams of protein, and 3.0 is the number of servings, 
+// the output is:
+
+// Nutritional information per serving of M&M's:
+//   Fat: 10.00 g
+//   Carbohydrates: 34.00 g
+//   Protein: 2.00 g
+// Number of calories for 1.00 serving(s): 234.00
+// Number of calories for 3.00 serving(s): 702.00
+
+public class NutritionalInfo {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        FoodItem foodItem;
+      
+        String itemName = scnr.next();
+        if(itemName.equals("Water") || itemName.equals("water")) {
+            foodItem = new FoodItem();
+         
+            foodItem.printInfo();
+            System.out.printf("Number of calories for %.2f serving(s): %.2f\n", 1.0, foodItem.getCalories(1.0));
+        }
+      
+        else {
+            double amountFat = scnr.nextDouble();
+            double amountCarbs = scnr.nextDouble();
+            double amountProtein = scnr.nextDouble();
+      
+            foodItem = new FoodItem(itemName, amountFat, amountCarbs, amountProtein);
+      
+            double numServings = scnr.nextDouble();
+                                                      
+            foodItem.printInfo();
+            System.out.printf("Number of calories for %.2f serving(s): %.2f\n", 1.0, foodItem.getCalories(1.0));
+                             
+            System.out.printf("Number of calories for %.2f serving(s): %.2f\n", numServings, foodItem.getCalories(numServings));
+        }
+    }
+}
+
+public class FoodItem {
+    private String name;
+    private double fat;
+    private double carbs;
+    private double protein;
+   
+    public FoodItem(){
+        name = "Water";
+        fat = 0.00;
+        carbs = 0.00;
+        protein = 0.00; 
+    }
+   
+  
+    public FoodItem(String name, double fat, double carbs, double protein){
+        this.name = name;
+        this.fat = fat;
+        this.carbs = carbs;
+        this.protein = protein; 
+    }
+
+
+    public String getName() {
+        return name;
+    }
+   
+    public double getFat() {
+        return fat;
+    }
+   
+    public double getCarbs() {
+        return carbs;
+    }
+   
+    public double getProtein() {
+        return protein;
+    }
+   
+    public double getCalories(double numServings) {
+          // Calorie formula
+        double calories = ((fat * 9) + (carbs * 4) + (protein * 4)) * numServings;
+        return calories;
+    }
+   
+    public void printInfo() {
+        System.out.println("Nutritional information per serving of " + name + ":");
+        System.out.printf("  Fat: %.2f g\n", fat);
+        System.out.printf("  Carbohydrates: %.2f g\n", carbs);
+        System.out.printf("  Protein: %.2f g\n", protein);
+    }
+}
