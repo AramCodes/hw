@@ -1568,3 +1568,132 @@ public class FoodItem {
         System.out.printf("  Protein: %.2f g\n", protein);
     }
 }
+
+public class RackLinkedList {   
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      RackNode headObj;
+      RackNode firstRack;
+      RackNode secondRack;
+      RackNode currRack;
+      String color1;
+      String color2;
+
+      color1 = scnr.next();
+      color2 = scnr.next();
+
+      headObj = new RackNode("color");
+   
+
+      firstRack = new RackNode(color1);
+      headObj.insertAfter(firstRack);
+
+      secondRack = new RackNode(color2);
+      firstRack.insertAfter(secondRack);
+
+
+      currRack = headObj;
+      while (currRack != null) {
+         currRack.printNodeData();
+         currRack = currRack.getNext();
+      }
+   }
+}
+
+
+public class RabbitLinkedList {   
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      RabbitNode headRabbit = null;
+      RabbitNode currRabbit = null;
+      RabbitNode lastRabbit = null;
+      int rabbitCount;
+      int inputValue;
+      int i;
+
+      rabbitCount = scnr.nextInt();
+   
+      headRabbit = new RabbitNode(rabbitCount);
+      lastRabbit = headRabbit;
+   
+
+   for (i = 0; i < rabbitCount ; i++) {
+   currRabbit = new RabbitNode(scnr.nextInt());
+   lastRabbit.insertAfter(currRabbit);
+   lastRabbit = currRabbit; 
+ }
+
+      currRabbit = headRabbit;
+      while (currRabbit != null) {
+         currRabbit.printNodeData();
+         currRabbit = currRabbit.getNext();
+      }
+   }
+}
+
+
+
+class LengthNode {
+   private int lengthVal;
+   private LengthNode nextNodeRef;
+
+    public LengthNode(int lengthInit) {
+        this.lengthVal = lengthInit;
+        this.nextNodeRef = null;
+    }
+
+    public void insertAfter(LengthNode nodeLoc) {
+        LengthNode tmpNext = null;
+
+        tmpNext = this.nextNodeRef;
+        this.nextNodeRef = nodeLoc;
+        nodeLoc.nextNodeRef = tmpNext;
+    }
+
+    public LengthNode getNext() {
+        return this.nextNodeRef;
+    }
+
+    public int getNodeData() {
+        return this.lengthVal;
+    }
+}
+
+
+public class LengthLinkedList {   
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        LengthNode headLength = null;
+        LengthNode currLength = null;
+        LengthNode lastLength = null;
+        int count;
+        int inputValue;
+        int i;
+      
+        count = scnr.nextInt();
+   
+        headLength = new LengthNode(count);
+        lastLength = headLength;
+
+        for (i = 0; i < count; ++i) {
+            inputValue = scnr.nextInt();
+      
+            currLength = new LengthNode(inputValue);
+      
+            lastLength.insertAfter(currLength);
+            lastLength = currLength;
+        }
+
+        lastLength = headLength;
+        for(i = 0; i <= count; i++) {
+            if(lastLength.getNodeData() < 0) {
+                System.out.println(lastLength.getNodeData() + " may be a wrong entry.");
+            } 
+
+            lastLength = lastLength.getNext();
+        }
+
+
+    }
+}
+
