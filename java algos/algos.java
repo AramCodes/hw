@@ -4,6 +4,11 @@
 //2. Columns are in ascending order. Plant benches in the first column all end with the integer 1.
 //3. Add an empty string at the beginning of the output to properly concatenate characters and integers.
 import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 
 public class NestedLoops {
    public static void main (String[] args) {
@@ -1697,3 +1702,517 @@ public class LengthLinkedList {
     }
 }
 
+public class OutputNotation {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        char seatLetter;
+		int amountChanged;
+		double width;
+      
+        seatLetter = scnr.next().charAt(0);
+		amountChanged = scnr.nextInt();
+		width = scnr.nextDouble();
+
+        System.out.printf("%h%%\n", seatLetter );
+        System.out.printf("%o%%\n", amountChanged );
+        System.out.printf("%e%%\n", width );
+
+      
+
+    }
+}
+
+public class OutputFormatter {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int boxLength;
+        double boxHeight;
+      
+        boxLength = scnr.nextInt();
+        boxHeight = scnr.nextDouble();
+
+        System.out.printf("%+07d\n", boxLength );
+        System.out.printf("%-8.4f\n", boxHeight);
+
+
+
+    }
+}
+
+public class OutputFormatter {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        String firstName;
+      
+        firstName = scnr.next();
+
+        System.out.printf("%-6s Thompson\n", firstName);
+    }
+}
+
+public class StringInputStream {
+    public static void main (String [] args) {
+        Scanner scnr = new Scanner(System.in);
+        Scanner inSS = null;
+        String userInput;
+        String userMonth;
+        int userDate;
+        int userYear;
+
+        userInput = scnr.nextLine();
+        inSS = new Scanner(userInput);
+     
+        userMonth = inSS.next();
+        userDate = inSS.nextInt();
+        userYear = inSS.nextInt();
+
+      
+
+        System.out.println("Month: " + userMonth);
+        System.out.println("Date: " + userDate);
+        System.out.println("Year: " + userYear);
+    }
+}
+
+public class StringStreamOutput {
+    public static void main (String [] args) {
+        Scanner scnr = new Scanner(System.in);
+        String userItem;
+
+        StringWriter itemCharStream = new StringWriter();
+        PrintWriter itemsOSS = new PrintWriter(itemCharStream);
+
+        System.out.println("Enter items (type Exit to quit):");
+        userItem = scnr.next();
+
+        while (!userItem.equals("Exit")) {
+          
+            System.out.print(userItem + " ");
+
+            userItem = scnr.next();
+        }
+
+        userItem = itemCharStream.toString();
+        System.out.println(userItem);
+    }
+}
+
+public class LetterDataProcessor {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        String dataFileName;
+        char letterGrade;
+        FileInputStream gradeStream = null;
+        Scanner inFS = null;
+
+
+        dataFileName = scnr.next();
+
+        gradeStream = new FileInputStream(dataFileName);
+        inFS = new Scanner(gradeStream);
+
+        letterGrade = inFS.next().charAt(0);
+        System.out.println(letterGrade);
+
+        gradeStream.close();
+    }
+}
+
+public class DillDataProcessor {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        String nameOfFile;
+        double dillWeight;
+        FileInputStream groceryInStream = null;
+        Scanner inFS = null;
+
+        nameOfFile = scnr.next();
+
+        groceryInStream = new FileInputStream(nameOfFile );
+        inFS = new Scanner(groceryInStream );
+
+
+
+        dillWeight = inFS.nextDouble();
+        System.out.println(dillWeight);
+
+        groceryInStream.close();
+    }
+}
+
+public class FurnitureDataReader {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        String dataFileName;
+        int deskCount;
+        FileInputStream furnitureFStream = null;
+        Scanner deskFS = null;
+
+        dataFileName = scnr.next();
+
+        furnitureFStream = new FileInputStream(dataFileName);
+        deskFS = new Scanner(furnitureFStream);
+        deskCount =  deskFS.nextInt();
+        System.out.println(deskCount);
+
+        furnitureFStream.close(); // Close the file stream
+
+        // Attempt to access the file for testing purpose
+        furnitureFStream.read();
+    }
+}
+
+public class FileReading {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        FileInputStream fileByteStream = null;
+        Scanner dataFS = null;
+        String nameOfFile;
+        int mattressCount;
+
+        nameOfFile = scnr.next();
+
+        fileByteStream = new FileInputStream(nameOfFile);
+        dataFS = new Scanner(fileByteStream);
+
+        while (dataFS.hasNextInt()) {
+            mattressCount = dataFS.nextInt();
+            System.out.println(mattressCount);
+        }
+      
+        if (dataFS.hasNext()) {
+            System.out.println("Reading stopped at " + dataFS.next());
+        }
+        else {
+            System.out.println("Reached end of file");
+        }
+
+        fileByteStream.close();
+    }
+}
+
+public class PearDataProcessor {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        String fileName;
+        double pearQuantity;
+        FileOutputStream pearFStream = null;
+        PrintWriter pearDataFS = null; 
+
+        fileName = scnr.next();
+        pearFStream = new FileOutputStream(fileName);
+        pearDataFS = new PrintWriter(pearFStream);
+
+        pearQuantity = scnr.nextDouble();
+
+        pearDataFS.println(pearQuantity + " pounds of pears");
+        pearDataFS.close();
+    }
+}
+
+public class OrangeDataProcessor {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        String nameOfFile;
+        String orangePurchase;
+        FileOutputStream outStream = null;
+        PrintWriter outFS = null;      
+
+        nameOfFile = scnr.next();
+        outStream = new FileOutputStream(nameOfFile);
+        outFS = new PrintWriter(outStream);
+      
+
+
+        orangePurchase = scnr.next();
+
+        outFS.println(orangePurchase + " ordered oranges");
+        outFS.close();
+    }
+}
+
+public class FileOutput {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        FileOutputStream fileStream = null;
+        PrintWriter shoerackOutFS = null;
+        int shoerackCount;
+        String friendName;
+
+        shoerackCount = scnr.nextInt();
+        friendName = scnr.next();
+  
+        fileStream = new FileOutputStream("output.txt");
+        shoerackOutFS = new PrintWriter(fileStream);
+
+        shoerackOutFS.println("To purchase:");
+        shoerackOutFS.println("+ # + # -");
+        shoerackOutFS.println(shoerackCount + " shoeracks for " + friendName);
+        shoerackOutFS.println("+ # + # -");
+
+        shoerackOutFS.close();
+    }
+}
+
+//book system 
+public class Book{
+
+    private String bookTitle;
+    private String bookAuthor;
+    private long bookISBN;
+
+    public Book() {
+   	    bookTitle = "";
+   	    bookAuthor = "";
+   	    bookISBN = 0;
+    }
+
+    public Book(String userBookTitle, String userBookAuthor, long userBookISBN) {
+   	    bookTitle = userBookTitle;
+   	    bookAuthor = userBookAuthor;
+   	    bookISBN = userBookISBN;
+    }
+   
+   public long getBookISBN() {
+	    return bookISBN;
+    }
+
+    public void printInfo(){
+   	    System.out.println("Title: " + bookTitle);
+        System.out.println("Author: " + bookAuthor);
+        System.out.println("ISBN: " + bookISBN);
+    }
+}
+
+public class ArrayListLibrary {
+   // ArraryList library
+   public ArrayList<Book> library; 
+   
+    public ArrayListLibrary() {
+        library = new ArrayList<Book>();
+    }
+   
+    public int insertSorted(Book newBook, int counter) {
+        Book currBook;
+      
+        // Add an empty element at end of list
+        library.add(null);
+      
+        // Loop through elements starting at the end
+        for (int i = library.size() - 2; i >=0; --i) {
+            currBook = library.get(i);
+         
+            // If the current book's ISBN is larger than newBook's ISBN, shift
+            // the current book down 1, count shift operation
+            if(currBook.getBookISBN() > newBook.getBookISBN()){
+                library.set(i+1, currBook);
+                ++counter;
+            }
+      
+            // Otherwise, place newBook at the next location (empty slot),
+            // count insert operation
+            else {
+                library.set(i+1, newBook);
+                ++counter;
+                return counter;
+            }
+        }
+      
+        // If we get to the top of the list, place newBook on top
+        library.set(0, newBook);
+        ++counter;
+      
+        return counter;
+    }
+   
+    public void printLibrary() {
+        for (int i = 0; i < library.size(); ++i) {
+            library.get(i).printInfo();
+            System.out.println();
+        }
+    } 
+}
+
+public class BookNode {
+    private String bookTitle;
+    private String bookAuthor;
+    private long bookISBN;
+    private BookNode nextNodePtr; // Reference to the next node                                   
+
+    public BookNode() {
+        bookTitle = "";
+        bookAuthor = "";
+        bookISBN = 0;
+        nextNodePtr = null;
+    }
+
+    // Constructor                                                                                     
+    public BookNode(String bookTitleInit, String bookAuthorInit, long bookISBNInit) {
+        this.bookTitle = bookTitleInit;
+        this.bookAuthor = bookAuthorInit;
+        this.bookISBN = bookISBNInit;
+        this.nextNodePtr = null;
+    }
+
+    // Constructor                                                                                     
+    public BookNode(String bookTitleInit, String bookAuthorInit, long bookISBNInit, BookNode nextLoc) {
+        this.bookTitle = bookTitleInit;
+        this.bookAuthor = bookAuthorInit;
+        this.bookISBN = bookISBNInit;
+        this.nextNodePtr = nextLoc;
+    }
+
+    // insertAfter
+    public void insertAfter(BookNode nodeLoc) {
+        BookNode tmpNext;
+
+        tmpNext = this.nextNodePtr;
+        this.nextNodePtr = nodeLoc;
+        nodeLoc.nextNodePtr = tmpNext;
+    }
+   
+    //setNext
+    public void setNext(BookNode nodeLoc) {
+        this.nextNodePtr = nodeLoc;
+    }
+   
+    // Get location pointed by nextNodePtr                                                             
+    public BookNode getNext() {
+        return this.nextNodePtr;
+    }
+   
+    public long getBookISBN() {
+        return this.bookISBN;
+    }
+
+    // Print book information
+    public void printBookInfo() {
+        System.out.println("Title: " + this.bookTitle);
+        System.out.println("Author: " + this.bookAuthor);
+        System.out.println("ISBN: " + this.bookISBN);
+    }
+}
+
+public class LinkedListLibrary {
+    //Linked list nodes
+    BookNode headNode;                                              
+    BookNode lastNode;
+   
+   LinkedListLibrary() {
+        // Front of nodes list                                                                         
+        headNode = new BookNode();
+        lastNode = headNode;
+    }
+   
+   public int insertSorted(BookNode newNode, int counter) {
+        BookNode currNode, nextNode;
+  
+        // Special case for head node
+        if (headNode == null || headNode.getBookISBN() >= newNode.getBookISBN()) { 
+            newNode.insertAfter(headNode);
+            headNode = newNode; 
+        } 
+        else { 
+            // Locate the node before insertion point
+            currNode = headNode; 
+  
+            while (currNode.getNext() != null && currNode.getNext().getBookISBN() < newNode.getBookISBN()) {
+                currNode = currNode.getNext();
+            }
+
+            newNode.setNext(currNode.getNext());
+            currNode.insertAfter(newNode);
+        } 
+      
+        ++counter;
+        return counter;
+    }
+   
+    public void printLibrary() {
+        BookNode currNode;
+         
+        currNode = headNode.getNext();
+        while (currNode != null) {
+            currNode.printBookInfo();
+            System.out.println();
+            currNode = currNode.getNext();
+        }
+    }
+}
+
+public class Library {
+   
+    public static void fillLibraries(LinkedListLibrary linkedListLibrary, ArrayListLibrary arrayListLibrary) throws IOException {
+        FileInputStream fileByteStream = null; // File input stream
+        Scanner inFS = null;                   // Scanner object
+        int linkedListOperations = 0;
+        int arrayListOperations = 0;
+      
+        BookNode currNode;
+        Book tempBook;
+      
+        String bookTitle;
+        String bookAuthor;
+        long bookISBN;
+      
+        // Try to open file
+        fileByteStream = new FileInputStream("Books.txt");
+        inFS = new Scanner(fileByteStream);
+
+        while (inFS.hasNextLine()) {
+            bookTitle = inFS.nextLine();
+            bookISBN = inFS.nextLong();
+            inFS.nextLine();
+            bookAuthor = inFS.nextLine();
+         
+            // Insert into linked list
+            currNode = new BookNode(bookTitle, bookAuthor, bookISBN);
+            linkedListOperations = linkedListLibrary.insertSorted(currNode, linkedListOperations);
+            linkedListLibrary.lastNode = currNode;
+         
+            // Insert into ArrayList
+            tempBook = new Book(bookTitle, bookAuthor, bookISBN);
+            arrayListOperations = arrayListLibrary.insertSorted(tempBook, arrayListOperations);
+        }
+      
+        fileByteStream.close(); // close() may throw IOException if fails
+    }
+       
+    public static void main (String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        int linkedListOperations = 0;
+        int arrayListOperations = 0;
+      
+        // Create libraries
+        LinkedListLibrary linkedListLibrary = new LinkedListLibrary();
+        ArrayListLibrary arrayListLibrary = new ArrayListLibrary();
+      
+        // Fill libraries with 100 books
+        fillLibraries(linkedListLibrary, arrayListLibrary);
+      
+        // Create new book to insert into libraries
+        BookNode currNode;
+        Book tempBook;
+      
+        String bookTitle;
+        String bookAuthor;
+        long bookISBN;
+      
+        bookTitle = scnr.nextLine();
+        bookISBN = scnr.nextLong();
+        scnr.nextLine();
+        bookAuthor = scnr.nextLine();
+       
+        // Insert into linked list
+        currNode = new BookNode(bookTitle, bookAuthor, bookISBN);
+        linkedListOperations += linkedListLibrary.insertSorted(currNode, linkedListOperations);  
+        linkedListLibrary.lastNode = currNode;
+      
+        // Insert into ArrayList
+        tempBook = new Book(bookTitle, bookAuthor, bookISBN);
+        arrayListOperations += arrayListLibrary.insertSorted(tempBook, arrayListOperations);
+      
+        System.out.println("Number of linked list operations: " + linkedListOperations );
+        System.out.println("Number of ArrayList operations: " + arrayListOperations );
+    }
+}
