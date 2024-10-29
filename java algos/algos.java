@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 
 public class NestedLoops {
@@ -2214,5 +2215,185 @@ public class Library {
       
         System.out.println("Number of linked list operations: " + linkedListOperations );
         System.out.println("Number of ArrayList operations: " + arrayListOperations );
+    }
+}
+
+public class DateParser {
+    public static int getMonthAsInt(String monthString) {
+        int monthInt;
+
+        // Java switch/case statement                                                                
+        switch (monthString) {
+            case "January": 
+                monthInt = 1; 
+                break;
+            case "February": 
+                monthInt = 2; 
+                break;
+            case "March": 
+                monthInt = 3; 
+                break;
+            case "April": 
+                monthInt = 4; 
+                break;
+            case "May": 
+                monthInt = 5; 
+                break;
+            case "June": 
+                monthInt = 6; 
+                break;
+            case "July": 
+                monthInt = 7; 
+                break;
+            case "August": 
+                monthInt = 8; 
+                break;
+            case "September": 
+                monthInt = 9; 
+                break;
+            case "October": 
+                monthInt = 10; 
+                break;
+            case "November": 
+                monthInt = 11; 
+                break;
+            case "December": 
+                monthInt = 12; 
+                break;
+            default: 
+               monthInt = 0;
+        }
+      
+        return monthInt;
+    }
+
+    public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      String input = scnr.nextLine();
+      int month;
+      int day = 0;
+      int year = 0;
+      int firstIndex;
+       int lastIndex;
+      
+        while (day != -1 || year != -1){
+            firstIndex = input.indexOf(' ');
+            lastIndex = input.lastIndexOf(' ');
+
+            String regex = "^(January|February|March|April|May|June|July|August|September|October|November|December) \\d{1,2}, \\d{4}$";
+            Pattern pattern = Pattern.compile(regex);
+
+            if (pattern.matcher(input).matches()) {
+                month = getMonthAsInt( input.substring(0, firstIndex).replace(" ", "") );
+                day = Integer.parseInt( input.substring(firstIndex, lastIndex).replaceAll("[,\\s]+", "") );
+                year = Integer.parseInt( input.substring(lastIndex).replace(" ", "") );
+                
+                System.out.println(month + "-" + day + "-" + year);
+            } 
+
+            input = scnr.nextLine();
+            month = 0;
+            day = 0;
+            year = 0;
+        }
+
+        scnr.close();
+    }
+}
+
+//Write a program that reads the student information from a tab separated values (tsv) file. The program then creates a text file 
+//that records the course grades of the students. Each row of the tsv file contains the Last Name, First Name, Midterm1 score, 
+//Midterm2 score, and the Final score of a student. A sample of the student information is provided in StudentInfo.tsv. Assume 
+//the number of students is at least 1 and at most 20. Assume also the last names and first names do not contain whitespaces.
+
+// Read the file name of the tsv file from the user.
+// Open the tsv file and read the student information.
+// Compute the average exam score of each student.
+// Assign a letter grade to each student based on the average exam score in the following scale: A: 90 =< x B: 80 =< x < 90 C: 70 =< x < 80 D: 60 =< x < 70 F: x < 60
+// Compute the average of each exam.
+// Output the last names, first names, exam scores, and letter grades of the students into a text file named report.txt. Output one student per row and separate the values with a tab character.
+// Output the average of each exam, with two digits after the decimal point, at the end of report.txt. Hint: Use the precision sub-specifier to format the output.
+
+public class LabProgram {
+    private static String calculateGrade(double score){
+        if (score < 0 || score > 100) {
+            throw new IllegalArgumentException("Score must be between 0 and 100.");
+        }
+        
+        if (score >= 90) {
+            return "A";
+        } else if (score >= 80) {
+            return "B";
+        } else if (score >= 70) {
+            return "C";
+        } else if (score >= 60) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);  // Scanner object
+        String fileName;
+        FileInputStream fileByteStream = null; // File input stream
+        FileOutputStream fileStream = null;   //  File output stream
+        PrintWriter studentOutFS = null;   //Print Writer
+        String lastName;
+        String firstName;
+        int midterm1;
+        int midterm2;
+        int finalScore;
+        String grade;
+        int count = 0;
+        double mid1Total = 0.00;
+        double mid2Total = 0.00;
+        double finalTotal = 0.00; 
+        double avg1; //midterm 1 average
+        double avg2; //midterm 2 average
+        double avg3; //final average
+
+        fileName = scnr.next();
+
+          // file control
+        fileByteStream = new FileInputStream(fileName); // opens file based on user input
+        scnr = new Scanner(fileByteStream); // feeds/reads file into scanner
+        fileStream = new FileOutputStream("report.txt"); // creates or opens file to write to 
+        studentOutFS = new PrintWriter(fileStream); // take output file to write to
+      
+        while(scnr.hasNext()){
+          lastName = scnr.next();
+          firstName = scnr.next();
+          midterm1 = scnr.nextInt();
+          midterm2 = scnr.nextInt();
+          finalScore = scnr.nextInt();
+
+          grade = calculateGrade( (midterm1 + midterm2 + finalScore) / 3.0 );
+
+
+          studentOutFS.print(lastName + "	" + firstName + "	" + midterm1);
+          studentOutFS.println("	" + midterm2 + "	" + finalScore + "	" + grade);
+
+          mid1Total += midterm1;
+          mid2Total += midterm2;
+          finalTotal += finalScore;
+          count++;
+
+        }
+
+        avg1 = (mid1Total / count); //midterm 1 average
+        avg2 = (mid2Total / count); //midterm 2 average
+        avg3 = (finalTotal / count); //final average
+
+        studentOutFS.println();
+        studentOutFS.printf("Averages: Midterm1 %.2f", avg1) ;
+        studentOutFS.printf(", Midterm2 %.2f", avg2) ;
+        studentOutFS.printf(", Final %.2f", avg3) ;
+        studentOutFS.println();
+      
+         //clean up
+        fileByteStream.close(); //nessecary or file won't save
+        studentOutFS.close(); // nessecary for resources
+      
     }
 }
