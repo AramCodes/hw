@@ -9,7 +9,7 @@ import java.io.StringWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.regex.Pattern;
-
+import java.util.InputMismatchException;
 
 public class NestedLoops {
    public static void main (String[] args) {
@@ -2395,5 +2395,559 @@ public class LabProgram {
         fileByteStream.close(); //nessecary or file won't save
         studentOutFS.close(); // nessecary for resources
       
+    }
+}
+
+public class AnimalData {
+    private int ageYears;
+    private String fullName;
+
+    public void setName(String givenName) {
+        fullName = givenName;
+    }
+
+    public void setAge(int numYears) {
+        ageYears = numYears;
+    }
+
+
+    public void printAll() {
+        System.out.print("Name: "  + fullName);
+        System.out.print(", Age: " + ageYears);
+    }
+}
+
+public class PetData extends AnimalData {
+    private int idNum;
+
+    public void setID(int petID) {
+        idNum = petID;
+    }
+    
+    public void printAll() {
+       super.printAll();
+       System.out.print(", ID: " + idNum);
+    }
+}
+
+public class BasicDerivedOverride {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        PetData userPet = new PetData();
+        String userName;
+        int userAge;
+        int userID;
+
+        userName = scnr.next();
+        userAge = scnr.nextInt();
+        userID = scnr.nextInt();
+
+        userPet.setName(userName);
+        userPet.setAge (userAge);
+        userPet.setID  (userID);
+        userPet.printAll();
+        System.out.println("");
+    }
+}
+
+public class CourseInformation {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+
+        Course myCourse = new Course();
+        OfferedCourse myOfferedCourse = new OfferedCourse();
+
+        String courseNumber, courseTitle;
+        String oCourseNumber, oCourseTitle, instructorName, location, classTime;
+
+        courseNumber = scnr.nextLine();
+        courseTitle = scnr.nextLine();
+
+        oCourseNumber =  scnr.nextLine();
+        oCourseTitle =  scnr.nextLine();
+        instructorName = scnr.nextLine();
+        location = scnr.nextLine();
+        classTime = scnr.nextLine();
+
+        myCourse.setCourseNumber(courseNumber);
+        myCourse.setCourseTitle(courseTitle);
+        myCourse.printInfo();
+
+        myOfferedCourse.setCourseNumber(oCourseNumber);
+        myOfferedCourse.setCourseTitle(oCourseTitle);
+        myOfferedCourse.setInstructorName(instructorName);
+        myOfferedCourse.setLocation(location);
+        myOfferedCourse.setClassTime(classTime);
+        myOfferedCourse.printInfo();
+
+        System.out.println("   Instructor Name: " + myOfferedCourse.getInstructorName());
+        System.out.println("   Location: " + myOfferedCourse.getLocation());
+        System.out.println("   Class Time: " + myOfferedCourse.getClassTime());
+    }
+}
+
+public class Course{
+   
+    String courseNumber;
+    String courseTitle;
+
+     
+    public void setCourseNumber(String courseNumber){
+        this.courseNumber = courseNumber;
+    }
+ 
+    public void setCourseTitle(String courseTitle){
+        this.courseTitle = courseTitle;
+    }
+     
+
+    public String getCourseNumber(){
+        return courseNumber;
+    } 
+
+    public String getCourseTitle(){
+        return courseTitle;
+    }
+
+    public void printInfo(){
+        System.out.println("Course Information:");
+        System.out.println("   Course Number: " + courseNumber);
+        System.out.println("   Course Title: " + courseTitle);
+    }
+}
+
+public class OfferedCourse extends Course {
+
+    String instructorName;
+    String location;
+    String classTime;
+  
+    public void setInstructorName(String instructorName){
+        this.instructorName = instructorName;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+    }
+
+    public void setClassTime(String classTime){
+        this.classTime = classTime;
+    }
+
+   
+    public String getInstructorName(){
+        return instructorName;
+    } 
+
+    public String getLocation(){
+        return location;
+    }
+
+    public String getClassTime(){
+        return classTime;
+    }
+
+}
+
+public class BookInformation {
+   public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+
+      Book myBook = new Book();
+      Encyclopedia myEncyclopedia = new Encyclopedia();
+
+        String title, author, publisher, publicationDate;
+        String eTitle, eAuthor, ePublisher, ePublicationDate, edition;
+        int numPages;
+
+        title = scnr.nextLine();
+        author = scnr.nextLine();
+        publisher = scnr.nextLine();
+        publicationDate = scnr.nextLine();
+
+        eTitle = scnr.nextLine();
+        eAuthor = scnr.nextLine();
+        ePublisher = scnr.nextLine();
+        ePublicationDate = scnr.nextLine();
+        edition = scnr.nextLine();
+        numPages = scnr.nextInt();
+
+        myBook.setTitle(title);
+        myBook.setAuthor(author);
+        myBook.setPublisher(publisher);
+        myBook.setPublicationDate(publicationDate);
+        myBook.printInfo();
+
+        myEncyclopedia.setTitle(eTitle);
+        myEncyclopedia.setAuthor(eAuthor);
+        myEncyclopedia.setPublisher(ePublisher);
+        myEncyclopedia.setPublicationDate(ePublicationDate);
+        myEncyclopedia.setEdition(edition);
+        myEncyclopedia.setNumPages(numPages);
+        myEncyclopedia.printInfo();
+
+    }
+}
+
+public class Book {
+
+    protected String title;
+    protected String author;
+    protected String publisher;
+    protected String publicationDate;
+
+    public void setTitle(String userTitle) {
+        title = userTitle;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setAuthor(String userAuthor) {
+        author = userAuthor;
+    }
+
+    public String getAuthor(){
+        return author;
+    }
+
+    public void setPublisher(String userPublisher) {
+        publisher = userPublisher;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+   public void setPublicationDate(String userPublicationDate) {
+        publicationDate = userPublicationDate;
+    }
+
+    public String getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void printInfo() {
+        System.out.println("Book Information: ");
+        System.out.println("   Book Title: " + title);
+        System.out.println("   Author: " + author);
+        System.out.println("   Publisher: " + publisher);
+        System.out.println("   Publication Date: " + publicationDate);
+    }
+}
+
+public class Encyclopedia extends Book {
+    String edition;
+    int numPages;  
+         
+    public void setEdition(String edition){
+        this.edition = edition;
+    }
+
+    public void setNumPages(int numPages){
+        this.numPages = numPages;
+    }
+   
+    public String getEdition(){
+        return edition;
+    }
+
+    public int getNumPages(){
+        return numPages; 
+    }
+   
+    @Override 
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("   Edition: " + edition);
+        System.out.println("   Number of Pages: " + numPages);
+    }
+   
+}
+
+public class ExpirationMonth {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int expirationMonth;
+
+        try {
+           expirationMonth = scnr.nextInt();
+            if ((expirationMonth < 1) || (expirationMonth > 12)) {
+                throw new Exception("Value error: Value between 1 and 12 expected");
+            }
+
+            System.out.print("Valid input: ");
+            System.out.println("Expiration month is " + expirationMonth);
+        }
+        catch (InputMismatchException excpt) {
+            System.out.println("Input type error: Integer expected");
+        }
+        catch (Exception excpt) {
+            System.out.println(excpt.getMessage());
+        }
+
+    }
+}
+
+public class CompletionPercentage {
+    public static void main(String[] args) {
+      Scanner scnr = new Scanner(System.in);
+      int completionPercentage;
+      int attemptsLeft = 2;
+
+        while (attemptsLeft > 0) {
+		    System.out.println("Attempts left: " + attemptsLeft);
+
+            try {
+                completionPercentage = scnr.nextInt();
+
+                if ((completionPercentage < 0) || (completionPercentage > 100)) {
+                    throw new Exception("Completion percentage must be between 0 and 100");
+                }
+
+                attemptsLeft = 0;
+                System.out.print("Valid input: ");
+                System.out.println("Completion percentage is " + completionPercentage);
+            }
+            catch (InputMismatchException excpt) {
+                System.out.println("Unexpected input: The CompletionPercentage program quits");
+                attemptsLeft = 0;
+
+            }
+            catch (Exception excpt) {
+                System.out.println(excpt.getMessage());
+                attemptsLeft -= 1;
+            }
+        
+
+        }
+    }
+}
+
+public class ReadInputFile {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        String rhubarbDataName;
+        int rhubarbValue;
+
+        rhubarbDataName = scnr.next();
+
+        try (Scanner fileScanner = new Scanner(new FileInputStream(rhubarbDataName) )) {
+            rhubarbValue = fileScanner.nextInt();
+            System.out.println("Value read from " + rhubarbDataName + ": " + rhubarbValue);
+        }
+        catch (IOException e) {
+            System.out.println(rhubarbDataName + ": File does not exist");
+        }
+    }
+}
+
+public class ReadInputFile {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        FileInputStream heightFStream;
+        Scanner fileScanner = null;
+        String heightDataFile;
+		double heightVal;
+		
+		heightDataFile = scnr.next();
+		
+		try {
+			heightFStream = new FileInputStream(heightDataFile);
+			fileScanner = new Scanner(heightFStream);
+			heightVal = fileScanner.nextDouble();
+			System.out.println("Value read from " + heightDataFile + ": " + heightVal);
+		}
+        catch (FileNotFoundException exception) {
+            System.out.println(heightDataFile + ": File not found");
+        }
+        finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
+        }
+ 
+    }
+}
+
+public class WriteCountVolumeFile {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        PrintWriter volumeInWriter = null;
+        String volumeDataFile;
+        double volumeData;
+        int dataCount = 0;
+
+        volumeDataFile = scnr.next();
+      
+        try {
+            volumeInWriter = new PrintWriter(new FileOutputStream(volumeDataFile));
+            for (dataCount = 0; dataCount < 4; ++dataCount) {
+                volumeData = scnr.nextDouble();
+                volumeInWriter.println(volumeData);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Error!");
+        }
+        finally {
+            if (volumeInWriter != null) {
+                volumeInWriter.println(dataCount + " valid value(s) read");
+                volumeInWriter.close();
+            }
+        }
+
+    }
+}
+
+public class NameAgeChecker {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+
+        String inputName;
+        int age;
+      
+        inputName = scnr.next();
+        while (!inputName.equals("-1")) {
+            try {
+                age = scnr.nextInt();
+                System.out.println(inputName + " " + (age + 1));
+            }
+            catch (InputMismatchException e) {
+                age = 0;
+                System.out.println(inputName + " " + (age));
+                inputName = scnr.nextLine();
+            }
+
+            inputName = scnr.next();
+        }
+    }
+}
+
+public class LabProgram {
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+
+        int userNum;
+        int divNum;
+
+      
+        try {
+            userNum = scnr.nextInt();
+            divNum = scnr.nextInt();
+
+            System.out.println(userNum / divNum);
+        }
+        catch (ArithmeticException e) {
+            System.out.println("Arithmetic Exception: " + e.getMessage());
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Input Mismatch Exception: " + e.toString());
+        } 
+  
+    }
+}
+
+public class LabProgram {
+    public static double stepsToMiles (int steps) throws Exception {
+        if (steps < 0) {
+            throw new Exception("Exception: Negative step count entered.");
+        }
+        return (double) steps / 2000;    
+    }
+   
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+
+        try {
+            int steps = scnr.nextInt();
+            
+            double miles = stepsToMiles(steps);
+            System.out.printf("%.2f\n", miles);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            scnr.close();
+        }
+    }
+}
+
+
+public class LabProgram {
+   
+    public static String findID(String studentName, Scanner infoScnr) throws Exception {
+        while (infoScnr.hasNextLine()) {
+            String line = infoScnr.nextLine();
+            String[] parts = line.split(" ");
+            String name = parts[0];
+            String id = parts[1];
+            
+            if (name.equalsIgnoreCase(studentName)) {
+                return id;  
+            }
+        }
+        
+        throw new Exception("Student ID not found for " + studentName);
+      
+    }
+   
+    public static String findName(String studentID, Scanner infoScnr) throws Exception {
+      
+        while (infoScnr.hasNextLine()) {
+            String line = infoScnr.nextLine();
+            String[] parts = line.split(" ");
+            String name = parts[0];
+            String id = parts[1];
+            
+            if (id.equals(studentID)) {
+                return name;
+            }
+        }
+        
+        throw new Exception("Student name not found for " + studentID);
+      
+    }
+   
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
+        String studentName;
+        String studentID;
+        String studentInfoFileName;
+        FileInputStream studentInfoStream = null;
+        Scanner studentInfoScanner = null;
+    
+        try {
+            // Read the text file name from user
+            studentInfoFileName = scnr.next();
+
+            // Open the text file
+            studentInfoStream = new FileInputStream(studentInfoFileName);
+            studentInfoScanner = new Scanner(studentInfoStream);
+
+            // Read search option from user. 0: findID(), 1: findName()
+            int userChoice = scnr.nextInt();
+      
+            if (userChoice == 0) {
+                studentName = scnr.next();
+                studentID = findID(studentName, studentInfoScanner);
+                System.out.println(studentID);
+            }
+            else {
+                studentID = scnr.next();
+                studentName = findName(studentID, studentInfoScanner);
+                System.out.println(studentName);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: The file was not found.");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            scnr.close();
+        }
+      
+        studentInfoStream.close();
     }
 }
