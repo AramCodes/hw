@@ -2901,7 +2901,7 @@ public class LabProgram {
             String name = parts[0];
             String id = parts[1];
             
-            if (id.equals(studentID)) {
+            if (id.equalsIgnoreCase(studentID)) {
                 return name;
             }
         }
@@ -2924,9 +2924,10 @@ public class LabProgram {
 
             // Open the text file
             studentInfoStream = new FileInputStream(studentInfoFileName);
+            // Create a scanner object and feed the text file to it
             studentInfoScanner = new Scanner(studentInfoStream);
 
-            // Read search option from user. 0: findID(), 1: findName()
+            // Read search option from scanner if userChoice = 0: findID(), 1: findName()
             int userChoice = scnr.nextInt();
       
             if (userChoice == 0) {
@@ -2949,5 +2950,136 @@ public class LabProgram {
         }
       
         studentInfoStream.close();
+    }
+}
+
+public class RecursiveCalls {
+    public static void backwardsAlphabet(char currLetter) {
+        if (currLetter == 'a') {
+            System.out.println(currLetter);
+        }
+        else {
+            System.out.print(currLetter + " ");
+            backwardsAlphabet((char)(currLetter - 1));
+        }
+    }
+
+    public static void main (String [] args) {
+        Scanner scnr = new Scanner(System.in);
+        char startingLetter;
+
+        startingLetter = scnr.next().charAt(0);
+        backwardsAlphabet( startingLetter );
+    }
+
+}
+
+public class NationSearch {
+    public static void search(ArrayList<String> searchList, int minIndex, int maxIndex) {
+        int rangeSize;
+        int midIndex;
+        rangeSize = minIndex + maxIndex + 1;
+        midIndex = (maxIndex - minIndex) / 2;
+
+        System.out.println("Number of elements in the range: " + rangeSize);
+        System.out.println("Middle index: " + midIndex);
+        System.out.println("Element at middle index: " + searchList.get(midIndex));
+    }
+   
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<String> dataList = new ArrayList<String>();
+        int numData;
+        int i;
+   
+        numData = scnr.nextInt();
+        for (i = 0; i < numData; ++i) {
+            dataList.add(scnr.next());
+        }
+
+        search(dataList, 0, dataList.size() - 1);
+    }
+}
+
+public class FindNation {
+    public static void findNation(ArrayList<String> searchList, String queryItem, int lowIndex, int highIndex) {
+        int rangeSize;
+        int midIndex;
+      
+        rangeSize = (highIndex - lowIndex) + 1;
+        midIndex = (lowIndex + highIndex) / 2;
+        if( queryItem.equals(searchList.get(midIndex)) ) {
+            System.out.println(queryItem +  " is found at index " + midIndex);
+        }
+        else if (rangeSize == 1){
+            System.out.println(queryItem +  " is not in the list");
+        }
+        else {
+            System.out.println(queryItem + " is not found at index " + midIndex);
+        }
+
+    }
+   
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<String> dataList = new ArrayList<String>();
+        String queryItem;
+        int numData;
+        int i;
+      
+        queryItem = scnr.next();
+        numData = scnr.nextInt();
+        for (i = 0; i < numData; ++i) {
+            dataList.add(scnr.next());
+        }
+
+        findNation(dataList, queryItem, 0, dataList.size() - 1);
+    }
+}
+
+public class WordSearch {
+    public static void search(ArrayList<String> searchList, String queryItem, int lowerIndex, int upperIndex) {
+        int rangeSize;
+        int midIndex;
+        String midValue;
+   
+        rangeSize = (upperIndex - lowerIndex) + 1;
+        midIndex = (lowerIndex + upperIndex) / 2;
+        midValue = searchList.get(midIndex);
+
+        if (queryItem.equals(midValue)) {
+            System.out.println(queryItem + " is found at index " + midIndex);
+        }
+        else if (rangeSize == 1) {
+            System.out.println(queryItem + " is not in the list");
+        }
+        else {
+
+            if ( queryItem.compareTo( midValue ) < 0 ){
+                System.out.println("Search lower half");
+                search(searchList, queryItem, lowerIndex, midIndex);
+            }
+            else {
+                System.out.println("Search upper half");
+                search(searchList, queryItem, midIndex + 1, upperIndex);
+            }
+
+        }
+    }
+   
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        ArrayList<String> dataList = new ArrayList<String>();
+        String queryItem;
+        int numData;
+        int i;
+   
+        queryItem = scnr.next();
+        numData = scnr.nextInt();
+        for (i = 0; i < numData; ++i) {
+            dataList.add(scnr.next());
+        }
+
+        search(dataList, queryItem, 0, dataList.size() - 1);
     }
 }
