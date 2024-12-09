@@ -1618,7 +1618,7 @@ var countTestedDevices = function (batteryPercentages) {
 	//runtime increased to 50% from 21% and memory increased to 73% from 13%
 	let count = 0;
 
-	batteryPercentages.forEach((percentatge, i) => {
+	batteryPercentages.forEach((_, i) => {
 		if (batteryPercentages[i] > 0) {
 			count++;
 			for (let j = i + 1; j < batteryPercentages.length; j++) {
@@ -1648,7 +1648,8 @@ var countTestedDevices = function (batteryPercentages) {
 	return count;
 };
 
-//Given an array of integers nums, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in
+//Given an array of integers nums, sort the array in increasing order based on the frequency of the values. If multiple values have
+//the same frequency, sort them in
 //decreasing order. Return the sorted array.
 var frequencySort = function (nums) {
 	//passes all preliminary tests and allows submission
@@ -1805,7 +1806,7 @@ var minOperations = function (nums) {
 	return count;
 };
 
-//remover math.abs and switch position to make memory gains
+//removed math.abs and switch position to make memory gains
 var minOperations = function (nums) {
 	//passes all preliminary test but doesn't allow submissions
 	//runtime beats 63% and memory beats 53% from 43% of all submissions.

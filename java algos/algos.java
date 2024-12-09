@@ -3083,3 +3083,109 @@ public class WordSearch {
         search(dataList, queryItem, 0, dataList.size() - 1);
     }
 }
+
+public class DetermineSum {
+    public static void sumAllValues(int argValue, int total) {
+        System.out.print(argValue);
+		total = total + argValue;
+
+        if (argValue <= 4){
+           System.out.println(" = " + total );
+        }
+
+
+        else {
+            System.out.print(" + ");
+			sumAllValues(argValue - 4, total);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int argValue;
+
+        argValue = scnr.nextInt();
+        sumAllValues(argValue, 0);
+    }
+}
+
+public class InStockRecords {
+    public static void getProduct(int month, int total) {
+        System.out.println("month: " + month + ", total: " + total);
+	
+		if (total <= 1000) {
+            System.out.print("Low stock limit is reached in month " + month + ".");
+        }
+        else {
+            getProduct(month + 1, total - 500);  
+        }
+
+
+    }
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int total;
+
+        total = scnr.nextInt();
+		getProduct(1, total);
+    }
+}
+
+public class MoneyAnalysis {
+    public static void increaseAmount(int day, int amount) {
+        System.out.println("day: " + day + ", amount: " + amount);
+	
+		if (day == 4) {
+           System.out.println("Finished");
+        }
+        else {
+            if(amount >= 200){
+                increaseAmount(day + 1, amount + 45);
+            }
+            else {
+                increaseAmount(day + 1, amount + 15);
+            }
+          
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int amount;
+
+        amount = scnr.nextInt();
+        increaseAmount(1, amount);
+    }
+}
+
+
+public class FibonacciSequence {
+
+    public static void computeFibonacci(int fibNum1, int fibNum2, int runCnt) {
+        System.out.println(fibNum1 + " + " + fibNum2 + " = " + 
+                         (fibNum1 + fibNum2));
+
+        if (runCnt <= 1) {
+                         
+        }
+        else {             
+            computeFibonacci(fibNum2, fibNum1 + fibNum2, runCnt - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int runFor;    
+
+        System.out.println("This program outputs the\n" +
+                         "Fibonacci sequence step-by-step,\n" +
+                         "starting after the first 0 and 1.\n");
+
+        System.out.print("How many steps would you like? ");
+        runFor = scnr.nextInt();
+
+        System.out.println("0\n1");
+        computeFibonacci(0, 1, runFor);
+    }
+}
